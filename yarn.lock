@@ -2458,6 +2458,11 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
+antd-dayjs-webpack-plugin@^1.0.6:
+  version "1.0.6"
+  resolved "https://nexus.yanshandianzi.com/repository/npm/antd-dayjs-webpack-plugin/-/antd-dayjs-webpack-plugin-1.0.6.tgz#7d98bcb51422248b8cd4a32e352a0425a3bffa3a"
+  integrity sha1-fZi8tRQiJIuM1KMuNSoEJaO/+jo=
+
 antd@^4.11.1:
   version "4.11.1"
   resolved "https://nexus.yanshandianzi.com/repository/npm/antd/-/antd-4.11.1.tgz#f0aa7921ad74d2c508bb5ed16857db9c997a4226"
@@ -4223,7 +4228,7 @@ date-fns@^2.15.0:
   resolved "https://nexus.yanshandianzi.com/repository/npm/date-fns/-/date-fns-2.16.1.tgz#05775792c3f3331da812af253e1a935851d3834b"
   integrity sha1-BXdXksPzMx2oEq8lPhqTWFHTg0s=
 
-dayjs@^1.8.30:
+dayjs@^1.10.4, dayjs@^1.8.30:
   version "1.10.4"
   resolved "https://nexus.yanshandianzi.com/repository/npm/dayjs/-/dayjs-1.10.4.tgz#8e544a9b8683f61783f570980a8a80eaf54ab1e2"
   integrity sha1-jlRKm4aD9heD9XCYCoqA6vVKseI=

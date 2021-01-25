@@ -1,4 +1,5 @@
 const CracoLessPlugin = require('craco-less');
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 module.exports = {
   plugins: [
@@ -13,5 +14,6 @@ module.exports = {
         },
       },
     },
+    { plugin: new AntdDayjsWebpackPlugin() },
   ],
 };

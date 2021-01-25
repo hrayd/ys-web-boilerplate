@@ -12,6 +12,8 @@
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "antd": "^4.11.1",
+    "craco-less": "^1.17.1",
+    "dayjs": "^1.10.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
@@ -44,6 +46,7 @@
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "antd-dayjs-webpack-plugin": "^1.0.6",
     "husky": "^4.3.8"
   },
   "husky": {
