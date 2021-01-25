@@ -1,7 +1,7 @@
 import { ComponentClass, FC } from "react";
 import Empty from "../components/Empty";
 
-const routerConfigs: RouterConfigItem[] = [
+const routeConfigs: RouterConfigItem[] = [
   { path: 'products', title: '产品管理', component: Empty },
   { path: 'devices', title: '设备管理', component: Empty },
   { path: 'instances', title: '边缘计算实例管理', component: Empty },
@@ -10,7 +10,7 @@ const routerConfigs: RouterConfigItem[] = [
 
 export const HOME_PATH = 'products';
 
-export default routerConfigs;
+export default routeConfigs;
 
 interface RouterConfigItem {
   path: string;

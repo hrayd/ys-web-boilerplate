@@ -1,7 +1,7 @@
 import { FC, useMemo } from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import routerConfigs from "../../configs/routerConfigs";
+import routeConfigs from "../../configs/routeConfigs";
 
 const StyledMenu = styled.div`
   width: 15rem;
@@ -30,7 +30,7 @@ const Menu: FC<RouteComponentProps> = ({ location }) => {
   }, [location]);
 
   const menus = useMemo(() => {
-    return routerConfigs.map((c) => {
+    return routeConfigs.map((c) => {
       return (
         <Link to={c.path} key={c.path}>
           <StyledMenuItem
