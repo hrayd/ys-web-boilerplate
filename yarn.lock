@@ -1857,6 +1857,13 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/echarts@^4.9.3":
+  version "4.9.3"
+  resolved "https://nexus.yanshandianzi.com/repository/npm/@types/echarts/-/echarts-4.9.3.tgz#8a143cf315f6ae88d0778d75a133b378974d37d5"
+  integrity sha1-ihQ88xX2rojQd411oTOzeJdNN9U=
+  dependencies:
+    "@types/zrender" "*"
+
 "@types/eslint@^7.2.4":
   version "7.2.6"
   resolved "https://nexus.yanshandianzi.com/repository/npm/@types/eslint/-/eslint-7.2.6.tgz#5e9aff555a975596c03a98b59ecd103decc70c3c"
@@ -2095,6 +2102,11 @@
   integrity sha1-YjTOPj4/oyxdswGhcPlqWZyWDXQ=
   dependencies:
     "@types/yargs-parser" "*"
+
+"@types/zrender@*":
+  version "4.0.0"
+  resolved "https://nexus.yanshandianzi.com/repository/npm/@types/zrender/-/zrender-4.0.0.tgz#a6806f12ec4eccaaebd9b0d816f049aca6188fbd"
+  integrity sha1-poBvEuxOzKrr2bDYFvBJrKYYj70=
 
 "@typescript-eslint/eslint-plugin@^4.5.0":
   version "4.14.0"
@@ -4665,6 +4677,14 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
+
+echarts@^5.0.1:
+  version "5.0.1"
+  resolved "https://nexus.yanshandianzi.com/repository/npm/echarts/-/echarts-5.0.1.tgz#b999ff6f515b1aa851ed09576eaf89686b57ce97"
+  integrity sha1-uZn/b1FbGqhR7QlXbq+JaGtXzpc=
+  dependencies:
+    tslib "2.0.3"
+    zrender "5.0.3"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -11708,6 +11728,11 @@ tsconfig-paths@^3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
+tslib@2.0.3:
+  version "2.0.3"
+  resolved "https://nexus.yanshandianzi.com/repository/npm/tslib/-/tslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
+  integrity sha1-jgdBrEX8DCJuWKF7/D5kubxsphw=
+
 tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://nexus.yanshandianzi.com/repository/npm/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
@@ -12624,3 +12649,10 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://nexus.yanshandianzi.com/repository/npm/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha1-ApTrPe4FAo0x7hpfosVWpqrxChs=
+
+zrender@5.0.3:
+  version "5.0.3"
+  resolved "https://nexus.yanshandianzi.com/repository/npm/zrender/-/zrender-5.0.3.tgz#5e04a55d36455067e4536c8ce9c25093f50f6b68"
+  integrity sha1-XgSlXTZFUGfkU2yM6cJQk/UPa2g=
+  dependencies:
+    tslib "2.0.3"
