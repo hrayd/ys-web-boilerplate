@@ -2,12 +2,15 @@ import './App.less';
 import styled from 'styled-components';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Menu from './components/Menu/Menu';
 
 function App() {
   return (
     <StyledApp>
       <Header />
-      <StyledContent />
+      <StyledContent>
+        <Menu />
+      </StyledContent>
       <Footer />
     </StyledApp>
   );
