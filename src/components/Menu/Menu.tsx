@@ -32,7 +32,7 @@ const Menu: FC<RouteComponentProps> = ({ location }) => {
   const menus = useMemo(() => {
     return routeConfigs.map((c) => {
       return (
-        <Link to={c.path} key={c.path}>
+        <Link to={`/${c.path}`} key={c.path}>
           <StyledMenuItem
             style={{ backgroundColor: c.path === activity ? ACTIVITY_COLOR : "" }}
           >
