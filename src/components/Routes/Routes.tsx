@@ -8,7 +8,7 @@ const StyledRoutes = styled.div`
   flex: 1;
   height: 100%;
   padding: 1rem;
-  background-color: grey;
+  background-color: #DEDEDE;
 `;
 
 const Routes: FC = () => {

@@ -4,7 +4,9 @@ import styled from "styled-components";
 const StyledHeader = styled.div`
   width: 100%;
   height: 6rem;
-  background-color: grey;
+  border-bottom: 1px solid grey;
+  background-color: #320001;
+  color: white;
 `;
 
 const Header: FC = () => {

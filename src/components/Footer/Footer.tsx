@@ -5,8 +5,10 @@ const StyledFooter = styled.div`
   width: 100%;
   height: 2rem;
   line-height: 2rem;
-  background-color: grey;
   text-align: center;
+  border-top: 1px solid grey;
+  background-color: #320001;
+  color: white;
 `;
 
 const Footer: FC = () => {
