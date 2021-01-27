@@ -9,6 +9,7 @@ const StyledRoutes = styled.div`
   height: 100%;
   padding: 1rem;
   background-color: #DEDEDE;
+  overflow: hidden;
 `;
 
 const Routes: FC = () => {
