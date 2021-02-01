@@ -1,3 +1,4 @@
+/** 空白占位组件 */
 import { FC } from "react";
 import { Empty } from "antd";
 
