@@ -3,17 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login/Login';
+import history from './utils/history';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/" component={App} />
       </Switch>
-    </BrowserRouter>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
