@@ -1,3 +1,4 @@
+/** 404 Page */
 import { FC } from "react";
 
 const Page404: FC = () => {

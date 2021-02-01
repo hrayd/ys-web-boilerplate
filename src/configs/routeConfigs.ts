@@ -1,7 +1,12 @@
+/** 路由配置
+ * 使用延迟加载方式引入：
+ * const component = lazy(() => import(PATH_TO_COMPONENT));
+ */
 import { ComponentClass, FC, lazy } from "react";
 
 const Empty = lazy(() => import("../components/Empty/Empty"));
 
+/** 页面/路由配置 */
 const routeConfigs: RouterConfigItem[] = [
   { path: 'page1', title: '页面1', component: Empty },
   { path: 'page2', title: '页面2', component: Empty },

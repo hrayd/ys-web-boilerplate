@@ -1,3 +1,4 @@
+/** 上方标题栏 */
 import { FC } from "react";
 import styled from "styled-components";
 
