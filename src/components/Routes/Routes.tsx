@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { FC, Suspense, useMemo } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import routeConfigs, { HOME_PATH } from "../../configs/routeConfigs";
@@ -8,7 +8,7 @@ const StyledRoutes = styled.div`
   flex: 1;
   height: 100%;
   padding: 1rem;
-  background-color: #DEDEDE;
+  background-color: #dedede;
   overflow: hidden;
 `;
 
@@ -25,11 +25,13 @@ const Routes: FC = () => {
 
   return (
     <StyledRoutes>
-      <Switch>
-        <Redirect from="/" to={HOME_PATH} exact />
-        {routes}
-        <Route path="/" component={Page404} />
-      </Switch>
+      <Suspense fallback={<Page404 />}>
+        <Switch>
+          <Redirect from="/" to={HOME_PATH} exact />
+          {routes}
+          <Route path="/" component={Page404} />
+        </Switch>
+      </Suspense>
     </StyledRoutes>
   );
 };

@@ -1,5 +1,6 @@
-import { ComponentClass, FC } from "react";
-import Empty from "../components/Empty/Empty";
+import { ComponentClass, FC, lazy } from "react";
+
+const Empty = lazy(() => import("../components/Empty/Empty"));
 
 const routeConfigs: RouterConfigItem[] = [
   { path: 'page1', title: '页面1', component: Empty },
