@@ -3,13 +3,14 @@
  * const component = lazy(() => import(PATH_TO_COMPONENT));
  */
 import { ComponentClass, FC, lazy } from "react";
+import Demo from "../components/Demo";
 
 const Empty = lazy(() => import("../components/Empty/Empty"));
 
 /** 页面/路由配置 */
 const routeConfigs: RouterConfigItem[] = [
   { path: 'page1', title: '页面1', component: Empty },
-  { path: 'page2', title: '页面2', component: Empty },
+  { path: 'page2', title: '页面2', component: Demo },
   { path: 'page3', title: '页面3', component: Empty },
   { path: 'page4', title: '页面4', component: Empty },
 ];

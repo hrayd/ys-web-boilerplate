@@ -7,7 +7,7 @@ interface Props {
   direction?: "column" | "row"; // 布局方向
 }
 
-const Container = styled.div<Props>`
+const StyledContainer = styled.div<Props>`
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -15,4 +15,4 @@ const Container = styled.div<Props>`
   flex-direction: ${props => props.direction || 'column'};
 `;
 
-export default Container;
+export default StyledContainer;
