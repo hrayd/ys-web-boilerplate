@@ -2,7 +2,7 @@ import './App.less';
 import styled from 'styled-components';
 import Header from './components/Header';
 import Menu from './components/Menu';
-import Routes from './components/Routes';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Header />
       <StyledContent>
         <Menu />
-        <Routes />
+        <Home />
       </StyledContent>
     </StyledApp>
   );

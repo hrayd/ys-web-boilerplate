@@ -1,4 +1,4 @@
-/** 路由模块 */
+/** Home内容主页 */
 import { FC, Suspense, useMemo } from "react";
 import {
   Redirect,
@@ -12,16 +12,18 @@ import routeConfigs, { HOME_PATH } from "../../configs/routeConfigs";
 import Page404 from "../../pages/404";
 import Footer from "../Footer";
 
-const StyledRoutesContainer = styled.div`
+const StyledHome = styled.div`
   flex: 1;
   height: 100%;
   background-color: #eff2f5;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledRoutes = styled.div`
   padding: 0 1rem;
-  overflow: hidden;
+  flex: 1;
 `;
 
 const StyledTitle = styled.div`
@@ -34,7 +36,7 @@ const StyledTitle = styled.div`
   margin-bottom: 1rem;
 `;
 
-const Routes: FC<RouteComponentProps> = ({ location }) => {
+const Home: FC<RouteComponentProps> = ({ location }) => {
   const routes = useMemo(
     () =>
       routeConfigs.map((c) => {
@@ -51,7 +53,7 @@ const Routes: FC<RouteComponentProps> = ({ location }) => {
   );
 
   return (
-    <StyledRoutesContainer>
+    <StyledHome>
       <StyledTitle>{title}</StyledTitle>
       <StyledRoutes>
         <Suspense fallback={<Page404 />}>
@@ -63,8 +65,8 @@ const Routes: FC<RouteComponentProps> = ({ location }) => {
         </Suspense>
       </StyledRoutes>
       <Footer content="版权信息" />
-    </StyledRoutesContainer>
+    </StyledHome>
   );
 };
 
-export default withRouter(Routes);
+export default withRouter(Home);
