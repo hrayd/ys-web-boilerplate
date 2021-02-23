@@ -1,6 +1,7 @@
 import { Table } from "antd";
 import { FC } from "react";
 import StyledTable from "../StyledComponents/StyledTable";
+import YSTable from "../YSTable";
 
 const mockData = () => {
   const result = [];
@@ -9,27 +10,25 @@ const mockData = () => {
       id: i,
       name: `NAME ${i}`,
       code: `CODE ${i}`,
-    })
+    });
   }
   return result;
 };
 
 const DemoTable: FC = () => {
   return (
-    <StyledTable>
-      <Table
-        rowKey="id"
-        dataSource={mockData()}
-        columns={[
-          { title: '名称', dataIndex: 'name' },
-          { title: '编码', dataIndex: 'code' },
-        ]}
-        pagination={{
-          showSizeChanger: true,
-        }}
-      />
-    </StyledTable>
-  )
-}
+    <YSTable
+      rowKey="id"
+      dataSource={mockData()}
+      columns={[
+        { title: "名称", dataIndex: "name" },
+        { title: "编码", dataIndex: "code" },
+      ]}
+      tableTitle="数据列表"
+      onAdd={() => {}}
+      onReload={() => {}}
+    />
+  );
+};
 
 export default DemoTable;
