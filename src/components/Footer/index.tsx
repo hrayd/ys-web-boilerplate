@@ -2,18 +2,21 @@
 import { FC } from "react";
 import styled from "styled-components";
 
+interface Props {
+  content?: string;
+}
+
 const StyledFooter = styled.div`
   width: 100%;
-  height: 2rem;
-  line-height: 2rem;
+  height: 3rem;
+  line-height: 3rem;
   text-align: center;
-  border-top: 1px solid grey;
-  background-color: #320001;
-  color: white;
+  color: grey;
 `;
 
-const Footer: FC = () => {
-  return <StyledFooter>Footer</StyledFooter>;
+const Footer: FC<Props> = ({ content }) => {
+  if (!content) return null;
+  return <StyledFooter>{content}</StyledFooter>;
 };
 
 export default Footer;

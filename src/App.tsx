@@ -1,7 +1,6 @@
 import './App.less';
 import styled from 'styled-components';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Menu from './components/Menu';
 import Routes from './components/Routes';
 
@@ -13,7 +12,6 @@ function App() {
         <Menu />
         <Routes />
       </StyledContent>
-      <Footer />
     </StyledApp>
   );
 }

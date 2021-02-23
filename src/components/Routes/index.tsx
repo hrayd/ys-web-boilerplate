@@ -10,11 +10,12 @@ import {
 import styled from "styled-components";
 import routeConfigs, { HOME_PATH } from "../../configs/routeConfigs";
 import Page404 from "../../pages/404";
+import Footer from "../Footer";
 
 const StyledRoutesContainer = styled.div`
   flex: 1;
   height: 100%;
-  background-color: #dedede;
+  background-color: #eff2f5;
   overflow: auto;
 `;
 
@@ -26,7 +27,7 @@ const StyledRoutes = styled.div`
 const StyledTitle = styled.div`
   height: 4rem;
   line-height: 4rem;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 0 1rem;
   font-size: 1.5rem;
   font-weight: 600;
@@ -61,6 +62,7 @@ const Routes: FC<RouteComponentProps> = ({ location }) => {
           </Switch>
         </Suspense>
       </StyledRoutes>
+      <Footer content="版权信息" />
     </StyledRoutesContainer>
   );
 };
