@@ -23,7 +23,7 @@ interface Props {
   params?: Record<string, unknown>; // 受控搜索栏
 }
 
-const SearchBar: FC<Props> = ({ items, onSearch, params }) => {
+const YSSearchBar: FC<Props> = ({ items, onSearch, params }) => {
   const [form] = Form.useForm();
   const [showMore, setShowMore] = useState(false);
 
@@ -115,4 +115,4 @@ const SearchBar: FC<Props> = ({ items, onSearch, params }) => {
   );
 };
 
-export default SearchBar;
+export default YSSearchBar;

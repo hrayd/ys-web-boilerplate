@@ -1,9 +1,9 @@
 import { FC } from "react";
-import SearchBar from "../SearchBar";
+import YSSearchBar from "../YSSearchBar";
 
 const DemoSearch: FC = () => {
   return (
-    <SearchBar
+    <YSSearchBar
       items={[
         { name: "name", label: "名称" },
         { name: "code", label: "编码" },
