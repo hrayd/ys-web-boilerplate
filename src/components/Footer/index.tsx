@@ -1,9 +1,10 @@
 /** 底部Footer */
 import { FC } from "react";
 import styled from "styled-components";
+import { CopyrightOutlined } from "@ant-design/icons";
 
 interface Props {
-  content?: string;
+  copyright: string;
 }
 
 const StyledFooter = styled.div`
@@ -14,9 +15,13 @@ const StyledFooter = styled.div`
   color: grey;
 `;
 
-const Footer: FC<Props> = ({ content }) => {
-  if (!content) return null;
-  return <StyledFooter>{content}</StyledFooter>;
+const Footer: FC<Props> = ({ copyright }) => {
+  return (
+    <StyledFooter>
+      {"Copyright "}
+      <CopyrightOutlined /> {copyright}
+    </StyledFooter>
+  );
 };
 
 export default Footer;

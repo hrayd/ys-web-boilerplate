@@ -64,7 +64,7 @@ const Home: FC<RouteComponentProps> = ({ location }) => {
           </Switch>
         </Suspense>
       </StyledRoutes>
-      <Footer content="版权信息" />
+      <Footer copyright="版权信息" />
     </StyledHome>
   );
 };
