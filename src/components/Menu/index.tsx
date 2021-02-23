@@ -2,7 +2,7 @@
 import { FC, useMemo } from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import routeConfigs from "../../configs/routeConfigs";
+import routeConfigs, { HOME_PATH } from "../../configs/routeConfigs";
 
 const StyledMenu = styled.div`
   width: 15rem;
@@ -19,15 +19,18 @@ const StyledMenuItem = styled.div`
   font-size: 1rem;
 
   &:hover {
-    background-color: #A70000;
+    background-color: #a70000;
   }
 `;
 
-const ACTIVITY_COLOR = '#A70000';
+const ACTIVITY_COLOR = "#A70000";
 
 const Menu: FC<RouteComponentProps> = ({ location }) => {
   const activity = useMemo(() => {
-    return location.pathname.slice(1);
+    return (
+      routeConfigs.find((r) => location.pathname.indexOf(r.path) === 1)?.path ||
+      HOME_PATH
+    );
   }, [location]);
 
   const menus = useMemo(() => {
@@ -35,7 +38,9 @@ const Menu: FC<RouteComponentProps> = ({ location }) => {
       return (
         <Link to={`/${c.path}`} key={c.path}>
           <StyledMenuItem
-            style={{ backgroundColor: c.path === activity ? ACTIVITY_COLOR : "" }}
+            style={{
+              backgroundColor: c.path === activity ? ACTIVITY_COLOR : "",
+            }}
           >
             {c.title}
           </StyledMenuItem>
