@@ -2,7 +2,7 @@
 import { FC, useMemo } from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import routeConfigs, { HOME_PATH } from "../../configs/routeConfigs";
+import routeConfigs from "../../configs/routeConfigs";
 
 const StyledMenu = styled.div`
   width: 15rem;
@@ -29,7 +29,7 @@ const Menu: FC<RouteComponentProps> = ({ location }) => {
   const activity = useMemo(() => {
     return (
       routeConfigs.find((r) => location.pathname.indexOf(r.path) === 1)?.path ||
-      HOME_PATH
+      ''
     );
   }, [location]);
 

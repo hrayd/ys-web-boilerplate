@@ -15,7 +15,7 @@ const routeConfigs: RouterConfigItem[] = [
   { path: 'page4', title: '页面4', component: Empty },
 ];
 
-export const HOME_PATH = 'page1';
+export const HOME_PATH = '/page1';
 
 export default routeConfigs;
 

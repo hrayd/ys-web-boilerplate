@@ -10,6 +10,7 @@ import {
 import styled from "styled-components";
 import routeConfigs, { HOME_PATH } from "../../configs/routeConfigs";
 import Page404 from "../../pages/404";
+import ErrorPage from "../../pages/ErrorPage";
 import Footer from "../Footer";
 
 const StyledHome = styled.div`
@@ -60,6 +61,7 @@ const Home: FC<RouteComponentProps> = ({ location }) => {
           <Switch>
             <Redirect from="/" to={HOME_PATH} exact />
             {routes}
+            <Route path="/error" component={ErrorPage} />
             <Route path="/" component={Page404} />
           </Switch>
         </Suspense>
