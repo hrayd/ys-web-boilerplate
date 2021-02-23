@@ -1,6 +1,4 @@
-import { Table } from "antd";
 import { FC } from "react";
-import StyledTable from "../StyledComponents/StyledTable";
 import YSTable from "../YSTable";
 
 const mockData = () => {

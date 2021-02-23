@@ -5,7 +5,7 @@
 import { ComponentClass, FC, lazy } from "react";
 import Demo from "../components/Demo";
 
-const Empty = lazy(() => import("../components/Empty/Empty"));
+const Empty = lazy(() => import("../components/Empty"));
 
 /** 页面/路由配置 */
 const routeConfigs: RouterConfigItem[] = [

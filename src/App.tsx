@@ -1,9 +1,9 @@
 import './App.less';
 import styled from 'styled-components';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import Menu from './components/Menu/Menu';
-import Routes from './components/Routes/Routes';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Menu from './components/Menu';
+import Routes from './components/Routes';
 
 function App() {
   return (
