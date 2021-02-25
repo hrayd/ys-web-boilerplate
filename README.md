@@ -1,4 +1,4 @@
-# A Foundation for YS Web Application
+# YS Web Application Boilerplate
 
 ## Technology Stack
 

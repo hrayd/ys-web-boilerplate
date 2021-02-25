@@ -1,6 +1,6 @@
 {
   "name": "ys-boilerplate",
-  "description": "A Boilerplate for YS Web Application",
+  "description": "YS Web Application Boilerplate",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
