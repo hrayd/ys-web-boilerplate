@@ -1,7 +1,15 @@
 /**
- * 公共表格组件
+ * 公共表格组件（前端分页）
  */
-import { Button, Dropdown, Menu, Table, TableProps, Tooltip } from "antd";
+import {
+  Button,
+  Dropdown,
+  Menu,
+  Table,
+  TablePaginationConfig,
+  TableProps,
+  Tooltip,
+} from "antd";
 import { FC, useMemo, useState } from "react";
 import styled from "styled-components";
 import {
@@ -12,10 +20,12 @@ import {
 } from "@ant-design/icons";
 
 interface Props<RecordType = any> extends TableProps<RecordType> {
+  dataSource: RecordType[];
   tableTitle?: string;
-  onAdd?: () => void;
-  onReload?: () => void;
+  onAdd?: () => void; // 设置之后展示新建按钮
+  onReload?: () => void; // 设置之后展示刷新按钮
   showSizeChanger?: boolean;
+  // TODO: 设置之后展示列项编辑功能
   showColumnsChanger?: boolean;
 }
 
@@ -25,19 +35,28 @@ const sizeMap = [
   { key: "small", label: "紧凑" },
 ];
 
+const DEFAULT_PAGE_SIZE = 20;
+
 const YSTable: FC<Props> = ({
+  dataSource,
   tableTitle,
   onAdd,
   onReload,
   showSizeChanger = true,
-  showColumnsChanger = true,
+  showColumnsChanger,
   ...tableProps
 }) => {
   const [tableSize, setTableSize] = useState(sizeMap[0].key);
 
+  // 提取出需要修改的属性，其他的属性直接放入Table组件
+  const { pagination, ...otherTableProps } = tableProps;
+
   const sizeOverLay = useMemo(
     () => (
-      <Menu onClick={(info) => setTableSize(info.key as string)} selectedKeys={[tableSize]}>
+      <Menu
+        onClick={(info) => setTableSize(info.key as string)}
+        selectedKeys={[tableSize]}
+      >
         {sizeMap.map((s) => (
           <Menu.Item key={s.key}>{s.label}</Menu.Item>
         ))}
@@ -45,6 +64,14 @@ const YSTable: FC<Props> = ({
     ),
     [tableSize]
   );
+
+  const paginationConfig: TablePaginationConfig = {
+    showSizeChanger: true,
+    defaultPageSize: DEFAULT_PAGE_SIZE,
+    showTotal: (total, range) =>
+      `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`,
+    ...pagination,
+  };
 
   return (
     <StyledTable>
@@ -67,26 +94,27 @@ const YSTable: FC<Props> = ({
           {showSizeChanger ? (
             <Tooltip title="密度">
               <Dropdown overlay={sizeOverLay} trigger={["click"]}>
-                <ColumnHeightOutlined style={{ marginLeft: "1rem", cursor: "pointer" }} />
+                <ColumnHeightOutlined
+                  style={{ marginLeft: "1rem", cursor: "pointer" }}
+                />
               </Dropdown>
             </Tooltip>
           ) : null}
           {showColumnsChanger ? (
             <Tooltip title="列设置">
-              <SettingOutlined style={{ marginLeft: "1rem", cursor: "pointer" }} />
+              <SettingOutlined
+                style={{ marginLeft: "1rem", cursor: "pointer" }}
+              />
             </Tooltip>
           ) : null}
         </div>
       </StyledTableHeader>
       <Table
-        pagination={{
-          showSizeChanger: true,
-          showTotal: (total, range) =>
-            `第 ${range[0]}-${range[1]} 条/总共 ${total} 条`,
-        }}
+        dataSource={dataSource}
+        pagination={paginationConfig}
         // @ts-ignore
         size={tableSize}
-        {...tableProps}
+        {...otherTableProps}
       />
     </StyledTable>
   );
