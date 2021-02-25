@@ -33,5 +33,5 @@
 
 - 推荐：采用css-in-js方案，使用 `styled-components` 实现
   - 将公共样式封装为独立的Styled组件
-  - 已内置了 `Container`、`Table`、`Search`组件
+  - `src/components`目录下以“YS”开头的组件为内置的公共组件，大多是对ant-design进行较为松散的定制
 - 也可采用CSS Module方案
