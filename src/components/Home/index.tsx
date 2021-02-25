@@ -49,7 +49,7 @@ const Home: FC<RouteComponentProps> = ({ location }) => {
   );
 
   const title: string = useMemo(
-    () => routeConfigs.find((r) => location.pathname.includes(r.path))?.title || '未知页面',
+    () => routeConfigs.find((r) => location.pathname.includes(r.path))?.title || '错误页面',
     [location]
   );
 
