@@ -3,53 +3,38 @@ import { FC, useMemo } from "react";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import routeConfigs from "../../configs/routeConfigs";
+import { Menu as AntdMenu } from "antd";
 
 const StyledMenu = styled.div`
   width: 15rem;
   height: 100%;
-  background-color: #5f5f5f;
 `;
-
-const StyledMenuItem = styled.div`
-  height: 4rem;
-  line-height: 4rem;
-  border-bottom: 2px solid #6c6c6c;
-  text-align: center;
-  color: white;
-  font-size: 1rem;
-
-  &:hover {
-    background-color: #a70000;
-  }
-`;
-
-const ACTIVITY_COLOR = "#A70000";
 
 const Menu: FC<RouteComponentProps> = ({ location }) => {
   const activity = useMemo(() => {
     return (
       routeConfigs.find((r) => location.pathname.indexOf(r.path) === 1)?.path ||
-      ''
+      ""
     );
   }, [location]);
 
   const menus = useMemo(() => {
     return routeConfigs.map((c) => {
       return (
-        <Link to={`/${c.path}`} key={c.path}>
-          <StyledMenuItem
-            style={{
-              backgroundColor: c.path === activity ? ACTIVITY_COLOR : "",
-            }}
-          >
-            {c.title}
-          </StyledMenuItem>
-        </Link>
+        <AntdMenu.Item style={{ paddingLeft: "1rem" }} key={c.path}>
+          <Link to={`/${c.path}`}>{c.title}</Link>
+        </AntdMenu.Item>
       );
     });
-  }, [activity]);
+  }, []);
 
-  return <StyledMenu>{menus}</StyledMenu>;
+  return (
+    <StyledMenu>
+      <AntdMenu mode="inline" selectedKeys={[activity]}>
+        {menus}
+      </AntdMenu>
+    </StyledMenu>
+  );
 };
 
 export default withRouter(Menu);
