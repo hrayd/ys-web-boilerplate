@@ -37,7 +37,7 @@ const Header: FC = () => {
           <Avatar
             icon={<UserOutlined />}
             size="small"
-            style={{ marginRight: ".5rem", backgroundColor: "blue" }}
+            style={{ marginRight: ".5rem", backgroundColor: "#2196f3" }}
           />
           {"管理员 "}
           <DownOutlined />
