@@ -124,7 +124,6 @@ const StyledTable = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
   padding: 1rem;
 `;
 

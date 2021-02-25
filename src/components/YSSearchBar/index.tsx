@@ -78,7 +78,6 @@ const YSSearchBar: FC<Props> = ({
     <Form
       form={form}
       style={{
-        backgroundColor: "#FFF",
         padding: "24px",
         paddingBottom: 0,
       }}
