@@ -1,23 +1,22 @@
-# 前端项目初始化框架
+# A Foundation for YS Web Application
 
-## 技术栈
+## Technology Stack
 
-基于 `create-react-app` 创建
-
-- react
+- react：based on `create-react-app`
 - typescript
 - ant-design
 - styled-component
 
-## 项目目录
+## Project Catalog
 
 - public：图标、导出配置、js文件引入
+  - config.js 导出配置文件
 - src
   - api：api索引
   - assets：代码中使用的静态资源如图片、语音等
   - components：组件
-  - configs：项目配置
-  - models：实体Interface或Type
+  - configs：项目配置：路由、菜单等
+  - models：实体Interface或Types
   - pages：独立页面
   - utils：工具类
 
