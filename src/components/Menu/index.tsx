@@ -8,6 +8,7 @@ import { Menu as AntdMenu } from "antd";
 const StyledMenu = styled.div`
   width: 15rem;
   height: 100%;
+  padding-top: 1rem;
 `;
 
 const Menu: FC<RouteComponentProps> = ({ location }) => {
@@ -21,7 +22,7 @@ const Menu: FC<RouteComponentProps> = ({ location }) => {
   const menus = useMemo(() => {
     return routeConfigs.map((c) => {
       return (
-        <AntdMenu.Item style={{ paddingLeft: "1rem" }} key={c.path}>
+        <AntdMenu.Item style={{ fontSize: "1rem" }} key={c.path}>
           <Link to={`/${c.path}`}>{c.title}</Link>
         </AntdMenu.Item>
       );
