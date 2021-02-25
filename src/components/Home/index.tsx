@@ -1,12 +1,6 @@
 /** Home内容主页 */
 import { FC, Suspense, useMemo } from "react";
-import {
-  Redirect,
-  Route,
-  RouteComponentProps,
-  Switch,
-  withRouter,
-} from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import routeConfigs, { HOME_PATH } from "../../configs/routeConfigs";
 import Page404 from "../../pages/404";
@@ -23,21 +17,11 @@ const StyledHome = styled.div`
 `;
 
 const StyledRoutes = styled.div`
-  padding: 0 1rem;
+  padding: 1rem;
   flex: 1;
 `;
 
-const StyledTitle = styled.div`
-  height: 4rem;
-  line-height: 4rem;
-  background-color: #ffffff;
-  padding: 0 1rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-`;
-
-const Home: FC<RouteComponentProps> = ({ location }) => {
+const Home: FC = () => {
   const routes = useMemo(
     () =>
       routeConfigs.map((c) => {
@@ -48,14 +32,8 @@ const Home: FC<RouteComponentProps> = ({ location }) => {
     []
   );
 
-  const title: string = useMemo(
-    () => routeConfigs.find((r) => location.pathname.includes(r.path))?.title || '错误页面',
-    [location]
-  );
-
   return (
     <StyledHome>
-      <StyledTitle>{title}</StyledTitle>
       <StyledRoutes>
         <Suspense fallback={<Page404 />}>
           <Switch>
@@ -71,4 +49,4 @@ const Home: FC<RouteComponentProps> = ({ location }) => {
   );
 };
 
-export default withRouter(Home);
+export default Home;
