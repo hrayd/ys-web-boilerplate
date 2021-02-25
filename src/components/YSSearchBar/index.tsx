@@ -21,9 +21,15 @@ interface Props {
   items: SearchItem[];
   onSearch: (params?: Record<string, unknown>) => void;
   params?: Record<string, unknown>; // 受控搜索栏
+  showAll?: boolean; // 不收缩，展示全部
 }
 
-const YSSearchBar: FC<Props> = ({ items, onSearch, params }) => {
+const YSSearchBar: FC<Props> = ({
+  items,
+  onSearch,
+  params,
+  showAll = false,
+}) => {
   const [form] = Form.useForm();
   const [showMore, setShowMore] = useState(false);
 
@@ -34,7 +40,7 @@ const YSSearchBar: FC<Props> = ({ items, onSearch, params }) => {
   }, [params, form]);
 
   const formItems = useMemo(() => {
-    if (items.length < 4 || showMore) {
+    if (showAll || items.length < 4 || showMore) {
       return items.map((item) => {
         const { render, ...formItemProps } = item;
         return (
@@ -56,7 +62,7 @@ const YSSearchBar: FC<Props> = ({ items, onSearch, params }) => {
         </Col>
       );
     });
-  }, [items, showMore]);
+  }, [items, showMore, showAll]);
 
   const onClickSearch = useCallback(() => onSearch(form.getFieldsValue()), [
     form,
@@ -76,10 +82,12 @@ const YSSearchBar: FC<Props> = ({ items, onSearch, params }) => {
         padding: "24px",
         paddingBottom: 0,
       }}
+      labelCol={{ span: 6 }}
+      wrapperCol={{ span: 18 }}
     >
-      <Row gutter={24} style={{ borderBottom: '1px solid #f0f0f0' }}>
+      <Row style={{ borderBottom: "1px solid #f0f0f0" }}>
         {formItems}
-        <Col span={6} style={{ marginBottom: "24px" }}>
+        <Col flex={1} style={{ marginBottom: "24px", textAlign: "right" }}>
           <Button
             type="primary"
             style={{ marginRight: "1rem" }}
