@@ -10,7 +10,6 @@ import Footer from "../Footer";
 const StyledHome = styled.div`
   flex: 1;
   height: 100%;
-  background-color: #eff2f5;
   overflow: auto;
   display: flex;
   flex-direction: column;

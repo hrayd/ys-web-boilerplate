@@ -73,12 +73,11 @@ const YSSearchBar: FC<Props> = ({ items, onSearch, params }) => {
       form={form}
       style={{
         backgroundColor: "#FFF",
-        marginBottom: "1rem",
         padding: "24px",
         paddingBottom: 0,
       }}
     >
-      <Row gutter={24}>
+      <Row gutter={24} style={{ borderBottom: '1px solid #f0f0f0' }}>
         {formItems}
         <Col span={6} style={{ marginBottom: "24px" }}>
           <Button

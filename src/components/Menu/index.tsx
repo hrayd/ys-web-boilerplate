@@ -8,7 +8,8 @@ import { Menu as AntdMenu } from "antd";
 const StyledMenu = styled.div`
   width: 15rem;
   height: 100%;
-  padding-top: 1rem;
+  border-right: 1px solid #f0f0f0;
+  margin: 2rem 0;
 `;
 
 const Menu: FC<RouteComponentProps> = ({ location }) => {
