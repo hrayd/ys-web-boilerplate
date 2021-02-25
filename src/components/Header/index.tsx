@@ -51,20 +51,19 @@ export default Header;
 
 const StyledHeader = styled.div`
   width: 100%;
-  height: 3rem;
-  line-height: 3rem;
-  padding: 0 1rem;
-  border-bottom: 1px solid grey;
-  background-color: #320001;
-  color: white;
+  height: 4rem;
+  line-height: 4rem;
+  padding: 0 2rem;
   display: flex;
   flex-direction: row;
+  z-index: 10;
+  box-shadow: 0 2px 8px #f0f1f2;
 `;
 
 const StyledHeaderIcon = styled.div`
   width: 2rem;
   height: 2rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   background: url(${icon}) center/cover no-repeat;
   margin-right: 1rem;
 `;
