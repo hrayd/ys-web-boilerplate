@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import YSTable from "../YSTable";
 
 const mockData = () => {
@@ -14,6 +15,8 @@ const mockData = () => {
 };
 
 const DemoTable: FC = () => {
+  const { t } = useTranslation();
+
   return (
     <YSTable
       rowKey="id"
@@ -22,7 +25,7 @@ const DemoTable: FC = () => {
         { title: "名称", dataIndex: "name" },
         { title: "编码", dataIndex: "code" },
       ]}
-      tableTitle="数据列表"
+      tableTitle={t("demo.tableTitle")}
       onAdd={() => {}}
       onReload={() => {}}
     />

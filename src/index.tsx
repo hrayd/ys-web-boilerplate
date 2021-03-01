@@ -8,6 +8,7 @@ import Login from "./pages/Login/Login";
 import history from "./utils/history";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale/zh_CN";
+import './i18n';
 
 ReactDOM.render(
   <React.StrictMode>
