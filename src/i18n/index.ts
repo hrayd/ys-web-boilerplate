@@ -9,7 +9,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: 'zh',  // 系统语言配置
+    lng: "zh", // 系统语言配置
     fallbackLng: "zh",
     debug: true,
 
@@ -20,7 +20,9 @@ i18n
 
 export default i18n;
 
-export const i18nList = [
-  { key: 'zh', label: '中文' },
-  { key: 'en', label: 'English' },
+export type i18nKey = "zh" | "en";
+
+export const i18nList: { key: i18nKey; label: string }[] = [
+  { key: "zh", label: "中文" },
+  { key: "en", label: "English" },
 ];

@@ -1,6 +1,6 @@
 /** 上方标题栏 */
 import Avatar from "antd/lib/avatar/avatar";
-import { FC, useCallback } from "react";
+import { FC, useCallback, useContext } from "react";
 import styled from "styled-components";
 import pkg from "../../../package.json";
 import icon from "../../assets/icon.png";
@@ -11,10 +11,17 @@ import {
 } from "@ant-design/icons";
 import { Button, Dropdown, Menu, message } from "antd";
 import { useTranslation } from "react-i18next";
-import { i18nList } from "../../i18n";
+import { i18nKey, i18nList } from "../../i18n";
+import LanguageContext from '../../i18n/LanguageContext';
 
 const Header: FC = () => {
   const { t, i18n } = useTranslation("common");
+  const { setLanguage } = useContext(LanguageContext);
+
+  const onChangeLanguage = useCallback((newLanguage: i18nKey) => {
+    i18n.changeLanguage(newLanguage);
+    setLanguage(newLanguage);
+  }, [i18n, setLanguage]);
 
   const onLogout = useCallback(() => {
     message.info(t("logout"));
@@ -38,7 +45,7 @@ const Header: FC = () => {
   const i18nOverlay = (
     <Menu
       selectedKeys={[i18n.language]}
-      onClick={({ key }) => i18n.changeLanguage(key as string)}
+      onClick={({ key }) => onChangeLanguage(key as i18nKey)}
     >
       {i18nList.map((l) => (
         <Menu.Item key={l.key}>
