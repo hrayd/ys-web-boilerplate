@@ -7,19 +7,8 @@ import Page404 from "../../pages/404";
 import ErrorPage from "../../pages/ErrorPage";
 import LoadingPage from "../../pages/LoadingPage";
 import Footer from "../Footer";
-
-const StyledHome = styled.div`
-  flex: 1;
-  height: 100%;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledRoutes = styled.div`
-  padding: 1rem;
-  flex: 1;
-`;
+import Header from "../Header";
+import Menu from "../Menu";
 
 const Home: FC = () => {
   const routes = useMemo(
@@ -33,20 +22,55 @@ const Home: FC = () => {
   );
 
   return (
-    <StyledHome>
-      <StyledRoutes>
-        <Suspense fallback={<LoadingPage />}>
-          <Switch>
-            <Redirect from="/" to={HOME_PATH} exact />
-            {routes}
-            <Route path="/error" component={ErrorPage} />
-            <Route path="/" component={Page404} />
-          </Switch>
-        </Suspense>
-      </StyledRoutes>
-      <Footer copyright="版权信息" />
-    </StyledHome>
+    <Suspense fallback={<LoadingPage />}>
+      <StyledApp>
+        <Header />
+        <StyledContent>
+          <Menu />
+          <StyledHome>
+            <StyledRoutes>
+              <Suspense fallback={<LoadingPage />}>
+                <Switch>
+                  <Redirect from="/" to={HOME_PATH} exact />
+                  {routes}
+                  <Route path="/error" component={ErrorPage} />
+                  <Route path="/" component={Page404} />
+                </Switch>
+              </Suspense>
+            </StyledRoutes>
+            <Footer copyright="版权信息" />
+          </StyledHome>
+        </StyledContent>
+      </StyledApp>
+    </Suspense>
   );
 };
 
 export default Home;
+
+const StyledApp = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledContent = styled.div`
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+`;
+
+const StyledHome = styled.div`
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledRoutes = styled.div`
+  padding: 1rem;
+  flex: 1;
+`;

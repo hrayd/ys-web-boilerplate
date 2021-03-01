@@ -1,37 +1,31 @@
-import "./App.less";
-import styled from "styled-components";
-import Header from "./components/Header";
-import Menu from "./components/Menu";
+/**
+ * App Container
+ */
+import dayjs from "dayjs";
+import { ConfigProvider } from "antd";
+import zhCN from "antd/lib/locale/zh_CN";
+import history from "./utils/history";
+import { Router, Switch, Route } from "react-router-dom";
+import Login from "./pages/Login/Login";
 import Home from "./components/Home";
-import { Suspense } from "react";
-import LoadingPage from "./pages/LoadingPage";
+
+import "./index.css";
+import "./i18n";
+import "./App.less";
+
+dayjs.locale("zh-cn");
 
 function App() {
   return (
-    <Suspense fallback={<LoadingPage />}>
-      <StyledApp>
-        <Header />
-        <StyledContent>
-          <Menu />
-          <Home />
-        </StyledContent>
-      </StyledApp>
-    </Suspense>
+    <ConfigProvider locale={zhCN}>
+      <Router history={history}>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/" component={Home} />
+        </Switch>
+      </Router>
+    </ConfigProvider>
   );
 }
 
 export default App;
-
-const StyledApp = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledContent = styled.div`
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-`;
