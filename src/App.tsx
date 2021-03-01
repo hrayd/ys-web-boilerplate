@@ -4,10 +4,11 @@ import Header from "./components/Header";
 import Menu from "./components/Menu";
 import Home from "./components/Home";
 import { Suspense } from "react";
+import LoadingPage from "./pages/LoadingPage";
 
 function App() {
   return (
-    <Suspense fallback="404">
+    <Suspense fallback={<LoadingPage />}>
       <StyledApp>
         <Header />
         <StyledContent>

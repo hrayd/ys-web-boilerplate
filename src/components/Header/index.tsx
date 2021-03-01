@@ -4,12 +4,17 @@ import { FC, useCallback } from "react";
 import styled from "styled-components";
 import pkg from "../../../package.json";
 import icon from "../../assets/icon.png";
-import { UserOutlined, DownOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  DownOutlined,
+  TranslationOutlined,
+} from "@ant-design/icons";
 import { Button, Dropdown, Menu, message } from "antd";
 import { useTranslation } from "react-i18next";
+import { i18nList } from "../../i18n";
 
 const Header: FC = () => {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
 
   const onLogout = useCallback(() => {
     message.info(t("logout"));
@@ -30,6 +35,21 @@ const Header: FC = () => {
     </Menu>
   );
 
+  const i18nOverlay = (
+    <Menu
+      selectedKeys={[i18n.language]}
+      onClick={({ key }) => i18n.changeLanguage(key as string)}
+    >
+      {i18nList.map((l) => (
+        <Menu.Item key={l.key}>
+          <Button type="text" size="small">
+            {l.label}
+          </Button>
+        </Menu.Item>
+      ))}
+    </Menu>
+  );
+
   return (
     <StyledHeader>
       <StyledHeaderIcon />
@@ -44,6 +64,11 @@ const Header: FC = () => {
           {"管理员 "}
           <DownOutlined />
         </StyledHeaderUser>
+      </Dropdown>
+      <Dropdown overlay={i18nOverlay}>
+        <StyledHeaderI18n>
+          <TranslationOutlined />
+        </StyledHeaderI18n>
       </Dropdown>
     </StyledHeader>
   );
@@ -78,5 +103,11 @@ const StyledHeaderTitle = styled.div`
 
 const StyledHeaderUser = styled.div`
   width: 8rem;
+  text-align: right;
+`;
+
+const StyledHeaderI18n = styled.div`
+  width: 3rem;
+  font-size: 1.2rem;
   text-align: right;
 `;

@@ -19,3 +19,8 @@ i18n
   });
 
 export default i18n;
+
+export const i18nList = [
+  { key: 'zh', label: '中文' },
+  { key: 'en', label: 'English' },
+];
