@@ -4,6 +4,7 @@ import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import routeConfigs from "../../configs/routeConfigs";
 import { Menu as AntdMenu } from "antd";
+import { useTranslation } from "react-i18next";
 
 const StyledMenu = styled.div`
   width: 15rem;
@@ -13,6 +14,8 @@ const StyledMenu = styled.div`
 `;
 
 const Menu: FC<RouteComponentProps> = ({ location }) => {
+  const { t } = useTranslation("menu");
+
   const activity = useMemo(() => {
     return (
       routeConfigs.find((r) => location.pathname.indexOf(r.path) === 1)?.path ||
@@ -24,11 +27,11 @@ const Menu: FC<RouteComponentProps> = ({ location }) => {
     return routeConfigs.map((c) => {
       return (
         <AntdMenu.Item style={{ fontSize: "1rem" }} key={c.path}>
-          <Link to={`/${c.path}`}>{c.title}</Link>
+          <Link to={`/${c.path}`}>{t(c.path)}</Link>
         </AntdMenu.Item>
       );
     });
-  }, []);
+  }, [t]);
 
   return (
     <StyledMenu>
