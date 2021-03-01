@@ -5,6 +5,7 @@ import styled from "styled-components";
 import routeConfigs, { HOME_PATH } from "../../configs/routeConfigs";
 import Page404 from "../../pages/404";
 import ErrorPage from "../../pages/ErrorPage";
+import LoadingPage from "../../pages/LoadingPage";
 import Footer from "../Footer";
 
 const StyledHome = styled.div`
@@ -34,7 +35,7 @@ const Home: FC = () => {
   return (
     <StyledHome>
       <StyledRoutes>
-        <Suspense fallback={<Page404 />}>
+        <Suspense fallback={<LoadingPage />}>
           <Switch>
             <Redirect from="/" to={HOME_PATH} exact />
             {routes}
