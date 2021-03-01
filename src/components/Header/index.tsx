@@ -6,23 +6,25 @@ import pkg from "../../../package.json";
 import icon from "../../assets/icon.png";
 import { UserOutlined, DownOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Menu, message } from "antd";
+import { useTranslation } from "react-i18next";
 
 const Header: FC = () => {
+  const { t } = useTranslation("common");
+
   const onLogout = useCallback(() => {
-    // TODO: 退出登录
-    message.info("退出登录");
-  }, []);
+    message.info(t("logout"));
+  }, [t]);
 
   const userOverlay = (
     <Menu>
       <Menu.Item>
         <Button type="text" size="small">
-          修改密码
+          {t("changePassword")}
         </Button>
       </Menu.Item>
       <Menu.Item>
         <Button type="text" size="small" onClick={onLogout}>
-          退出登录
+          {t("logout")}
         </Button>
       </Menu.Item>
     </Menu>

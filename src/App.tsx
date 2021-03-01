@@ -1,18 +1,21 @@
-import './App.less';
-import styled from 'styled-components';
-import Header from './components/Header';
-import Menu from './components/Menu';
-import Home from './components/Home';
+import "./App.less";
+import styled from "styled-components";
+import Header from "./components/Header";
+import Menu from "./components/Menu";
+import Home from "./components/Home";
+import { Suspense } from "react";
 
 function App() {
   return (
-    <StyledApp>
-      <Header />
-      <StyledContent>
-        <Menu />
-        <Home />
-      </StyledContent>
-    </StyledApp>
+    <Suspense fallback="404">
+      <StyledApp>
+        <Header />
+        <StyledContent>
+          <Menu />
+          <Home />
+        </StyledContent>
+      </StyledApp>
+    </Suspense>
   );
 }
 
