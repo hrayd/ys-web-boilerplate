@@ -15,7 +15,7 @@ const mockData = () => {
 };
 
 const DemoTable: FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('demo');
 
   return (
     <YSTable
@@ -25,7 +25,7 @@ const DemoTable: FC = () => {
         { title: "名称", dataIndex: "name" },
         { title: "编码", dataIndex: "code" },
       ]}
-      tableTitle={t("demo.tableTitle")}
+      tableTitle={t("tableTitle")}
       onAdd={() => {}}
       onReload={() => {}}
     />
