@@ -18,6 +18,7 @@ import {
   SettingOutlined,
   ColumnHeightOutlined,
 } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 interface Props<RecordType = any> extends TableProps<RecordType> {
   dataSource: RecordType[];
@@ -29,11 +30,7 @@ interface Props<RecordType = any> extends TableProps<RecordType> {
   showColumnsChanger?: boolean;
 }
 
-const sizeMap = [
-  { key: "default", label: "默认" },
-  { key: "middle", label: "中等" },
-  { key: "small", label: "紧凑" },
-];
+const tableSizeList = ["default", "middle", "small"];
 
 const DEFAULT_PAGE_SIZE = 10;
 
@@ -46,7 +43,8 @@ const YSTable: FC<Props> = ({
   showColumnsChanger,
   ...tableProps
 }) => {
-  const [tableSize, setTableSize] = useState(sizeMap[0].key);
+  const { t, i18n } = useTranslation("common");
+  const [tableSize, setTableSize] = useState(tableSizeList[0]);
 
   // 提取出需要修改的属性，其他的属性直接放入Table组件
   const { pagination, ...otherTableProps } = tableProps;
@@ -57,19 +55,25 @@ const YSTable: FC<Props> = ({
         onClick={(info) => setTableSize(info.key as string)}
         selectedKeys={[tableSize]}
       >
-        {sizeMap.map((s) => (
-          <Menu.Item key={s.key}>{s.label}</Menu.Item>
+        {tableSizeList.map((s) => (
+          <Menu.Item key={s}>{t(`tableSize.${s}`)}</Menu.Item>
         ))}
       </Menu>
     ),
-    [tableSize]
+    [t, tableSize]
   );
+
+  const showTotal = (total: number, range: [number, number]) => {
+    if (i18n.language === 'zh') {
+      return `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`;
+    }
+    return `${t("range")}: ${range[0]}-${range[1]} / ${t('total')}: ${total}`;
+  };
 
   const paginationConfig: TablePaginationConfig = {
     showSizeChanger: true,
     defaultPageSize: DEFAULT_PAGE_SIZE,
-    showTotal: (total, range) =>
-      `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`,
+    showTotal,
     ...pagination,
   };
 
@@ -79,12 +83,12 @@ const YSTable: FC<Props> = ({
         <div style={{ flex: 1 }}>{tableTitle || ""}</div>
         <div style={{ flex: 1, textAlign: "right" }}>
           {onAdd ? (
-            <Button type="primary" onClick={onAdd} title="新建">
-              <PlusOutlined /> 新建
+            <Button type="primary" onClick={onAdd} title={t("add")}>
+              <PlusOutlined /> {t("add")}
             </Button>
           ) : null}
           {onReload ? (
-            <Tooltip title="刷新">
+            <Tooltip title={t("refresh")}>
               <ReloadOutlined
                 style={{ marginLeft: "1rem", cursor: "pointer" }}
                 onClick={onReload}
@@ -92,7 +96,7 @@ const YSTable: FC<Props> = ({
             </Tooltip>
           ) : null}
           {showSizeChanger ? (
-            <Tooltip title="密度">
+            <Tooltip title={t("density")}>
               <Dropdown overlay={sizeOverLay} trigger={["click"]}>
                 <ColumnHeightOutlined
                   style={{ marginLeft: "1rem", cursor: "pointer" }}
@@ -101,7 +105,7 @@ const YSTable: FC<Props> = ({
             </Tooltip>
           ) : null}
           {showColumnsChanger ? (
-            <Tooltip title="列设置">
+            <Tooltip title={t("columnSetting")}>
               <SettingOutlined
                 style={{ marginLeft: "1rem", cursor: "pointer" }}
               />

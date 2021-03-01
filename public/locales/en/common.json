@@ -1,0 +1,17 @@
+{
+  "search": "Search",
+  "reset": "Reset",
+  "add": "Add",
+  "refresh": "Refresh",
+  "density": "Density",
+  "columnSetting": "Columns Setting",
+  "tableSize": {
+    "default": "Default",
+    "middle": "Middle",
+    "small": "Small"
+  },
+  "total": "Total",
+  "range": "Range",
+  "changePassword": "Change Password",
+  "logout": "Logout"
+}
