@@ -11,6 +11,7 @@ import {
 } from "react";
 import { Col, Input, Row, Form, Button, FormItemProps } from "antd";
 import { UpOutlined, DownOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 interface SearchItem extends FormItemProps {
   render?: Component;
@@ -32,6 +33,7 @@ const YSSearchBar: FC<Props> = ({
 }) => {
   const [form] = Form.useForm();
   const [showMore, setShowMore] = useState(false);
+  const { t } = useTranslation("common");
 
   useEffect(() => {
     if (params && form) {
@@ -46,7 +48,7 @@ const YSSearchBar: FC<Props> = ({
         return (
           <Col span={6} key={item.name}>
             <Form.Item {...formItemProps}>
-              {render || <Input placeholder={`请输入${item.label}`} />}
+              {render || <Input placeholder={`${t("input")} ${item.label}`} />}
             </Form.Item>
           </Col>
         );
@@ -57,12 +59,12 @@ const YSSearchBar: FC<Props> = ({
       return (
         <Col span={6} key={item.name}>
           <Form.Item {...formItemProps}>
-            {render || <Input placeholder={`请输入${item.label}`} />}
+            {render || <Input placeholder={`${t("input")} ${item.label}`} />}
           </Form.Item>
         </Col>
       );
     });
-  }, [items, showMore, showAll]);
+  }, [items, showMore, showAll, t]);
 
   const onClickSearch = useCallback(() => onSearch(form.getFieldsValue()), [
     form,
@@ -91,12 +93,12 @@ const YSSearchBar: FC<Props> = ({
             type="primary"
             style={{ marginRight: "1rem" }}
             onClick={onClickSearch}
-            title="查询"
+            title={t("search")}
           >
-            查询
+            {t("search")}
           </Button>
-          <Button onClick={onClickReset} title="重置">
-            重置
+          <Button onClick={onClickReset} title={t("reset")}>
+            {t("reset")}
           </Button>
           {items.length < 4 ? null : (
             <Button

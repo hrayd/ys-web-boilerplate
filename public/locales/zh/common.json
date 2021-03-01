@@ -13,5 +13,6 @@
   "total": "总共",
   "range": "范围",
   "changePassword": "修改密码",
-  "logout": "退出登录"
+  "logout": "退出登录",
+  "input": "请输入"
 }

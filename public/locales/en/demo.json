@@ -1,5 +1,10 @@
 {
   "tableTitle": "Data List",
   "tableColName": "Name",
-  "tableColCode": "Code"
+  "tableColCode": "Code",
+  "search": {
+    "name": "Name",
+    "code": "Code",
+    "date": "Date"
+  }
 }

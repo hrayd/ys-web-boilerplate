@@ -1,5 +1,10 @@
 {
   "tableTitle": "数据列表",
   "tableColName": "名称",
-  "tableColCode": "编码"
+  "tableColCode": "编码",
+  "search": {
+    "name": "名称",
+    "code": "编码",
+    "date": "日期"
+  }
 }
