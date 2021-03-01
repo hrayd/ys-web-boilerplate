@@ -1,3 +1,5 @@
 {
-  "tableTitle": "数据列表"
+  "tableTitle": "数据列表",
+  "tableColName": "名称",
+  "tableColCode": "编码"
 }

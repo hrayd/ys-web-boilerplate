@@ -6,21 +6,24 @@
 - typescript
 - ant-design
 - styled-component
+- react-i18next
 
 ## Project Catalog
 
 - public：图标、导出配置、js文件引入
   - config.js 导出配置文件
+  - locales 国际化配置文件
 - src
   - api：api索引
   - assets：代码中使用的静态资源如图片、语音等
   - components：组件
+    - 公共组件名称以 `YS` 开头
   - configs：项目配置：路由、菜单等
   - models：实体Interface或Types
   - pages：独立页面
   - utils：工具类
 
-## 开发Tips
+## Tips
 
 ### 状态管理
 
@@ -28,6 +31,13 @@
 
 - 组件/模块内部状态：useState、useReducer
 - 全局状态：useContext
+
+### i18n/国际化
+
+- [react-i18next 官方文档](https://react.i18next.com/)
+- 将所有字符串放入 `/public/locales/{lngName}/{moduleName}.json`
+- 开发期间或无国际化要求的项目可只写中文
+- 基本Hooks用法参考 `src/components/Demo/DemoTable.tsx` 
 
 ### 样式
 

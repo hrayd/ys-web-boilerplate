@@ -22,8 +22,8 @@ const DemoTable: FC = () => {
       rowKey="id"
       dataSource={mockData()}
       columns={[
-        { title: "名称", dataIndex: "name" },
-        { title: "编码", dataIndex: "code" },
+        { title: t('tableColName'), dataIndex: "name" },
+        { title: t('tableColCode'), dataIndex: "code" },
       ]}
       tableTitle={t("tableTitle")}
       onAdd={() => {}}

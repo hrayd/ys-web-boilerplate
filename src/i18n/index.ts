@@ -6,10 +6,10 @@ import { initReactI18next } from "react-i18next";
 i18n
   // load translation using http -> see /public/locales
   .use(Backend)
-  // detect user language
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    lng: 'zh',  // 系统语言配置
     fallbackLng: "zh",
     debug: true,
 
