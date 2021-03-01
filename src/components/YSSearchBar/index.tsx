@@ -4,6 +4,7 @@
 import {
   Component,
   FC,
+  ReactNode,
   useCallback,
   useEffect,
   useMemo,
@@ -14,7 +15,7 @@ import { UpOutlined, DownOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 
 interface SearchItem extends FormItemProps {
-  render?: Component;
+  render?: ReactNode;
   name: string;
 }
 

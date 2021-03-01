@@ -1,3 +1,4 @@
+import { DatePicker } from "antd";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import YSSearchBar from "../YSSearchBar";
@@ -9,7 +10,7 @@ const DemoSearch: FC = () => {
       items={[
         { name: "name", label: t("search.name") },
         { name: "code", label: t("search.code") },
-        { name: "date", label: t("search.date") },
+        { name: "date", label: t("search.date"), render: <DatePicker style={{ width: '100%' }} /> },
       ]}
       onSearch={() => {}}
     />

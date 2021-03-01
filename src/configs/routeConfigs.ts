@@ -9,8 +9,8 @@ const Empty = lazy(() => import("../components/Empty"));
 
 /** 页面/路由配置 */
 const routeConfigs: RouterConfigItem[] = [
-  { path: 'page1', component: Empty },
-  { path: 'page2', component: Demo },
+  { path: 'page1', component: Demo },
+  { path: 'page2', component: Empty },
   { path: 'page3', component: Empty },
   { path: 'page4', component: Empty },
 ];
