@@ -10,15 +10,16 @@ import history from "./utils/history";
 import { Router, Switch, Route } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Home from "./components/Home";
+import { i18nKey, i18nList } from "./i18n";
+import LanguageContext from "./i18n/LanguageContext";
 
 import "./index.css";
 import "./i18n";
 import "./App.less";
-import { i18nKey, i18nList } from "./i18n";
-import LanguageContext from "./i18n/LanguageContext";
+import "dayjs/locale/zh-cn";
 
 const dayjsLocaleMap = {
-  zh: "zh-cn",
+  zh: "zh",
   en: "en-us",
 };
 

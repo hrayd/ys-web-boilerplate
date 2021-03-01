@@ -2,7 +2,6 @@
  * 搜索栏组件
  */
 import {
-  Component,
   FC,
   ReactNode,
   useCallback,
