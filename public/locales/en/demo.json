@@ -1,5 +1,6 @@
 {
   "table": {
+    "title": "Data List",
     "name": "Name",
     "sex": "Sex",
     "createDate": "Create Date",

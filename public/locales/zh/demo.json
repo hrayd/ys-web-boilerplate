@@ -1,5 +1,6 @@
 {
   "table": {
+    "title": "数据列表",
     "name": "名称",
     "sex": "性别",
     "createDate": "创建时间",

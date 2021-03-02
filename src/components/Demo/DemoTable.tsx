@@ -50,7 +50,7 @@ const DemoTable: FC<Props> = ({ data, loading }) => {
       dataSource={data}
       loading={loading}
       columns={columns}
-      tableTitle={t("tableTitle")}
+      tableTitle={t("table.title")}
       onAdd={() => {}}
       onReload={() => {}}
     />
