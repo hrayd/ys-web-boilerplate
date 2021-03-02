@@ -1,5 +1,10 @@
 # YS Web Application Boilerplate
 
+## !重要
+
+- DatePicker、TimePicker、Calendar组件需要从 `src/components/YSDatePicker/` 目录引入，直接引入antd组件会出现dayjs的兼容性bug，原因参照 [Antd 官方文档相关说明](https://ant.design/docs/react/replace-moment-cn)。
+- 字符串需提取到 `/public/locales/zh/{moduleName}.json` 文件中，并通过 `react-i18next` 库相关方法引入，可参考 `src/components/Demo` 组件写法，详情参照 `react-i18next` 文档。
+
 ## Technology Stack
 
 - react：based on `create-react-app`
