@@ -6,16 +6,17 @@ import { IDemo } from "../../models/demo";
 import { DictSex } from "../../constants/dict";
 import YSTable from "../YSTable";
 import { DateFormatString } from "../../constants/strings";
-import { Button } from "antd";
+import { Button, Popconfirm } from "antd";
 
 interface Props {
   data: IDemo[];
   loading: boolean;
   onAdd: () => void;
   onEdit: (item: IDemo) => void;
+  onDel: (item: IDemo) => void;
 }
 
-const DemoTable: FC<Props> = ({ data, loading, onAdd, onEdit }) => {
+const DemoTable: FC<Props> = ({ data, loading, onAdd, onEdit, onDel }) => {
   const { t } = useTranslation(["demo", "common"]);
 
   const columns = useMemo(
@@ -47,18 +48,28 @@ const DemoTable: FC<Props> = ({ data, loading, onAdd, onEdit }) => {
         title: t("common:operations"),
         dataIndex: "OPERATIONS",
         render: (v: unknown, r: IDemo) => (
-          <Button
-            size="small"
-            onClick={() => onEdit(r)}
-            title={t("edit")}
-            type="link"
-          >
-            {t("common:edit")}
-          </Button>
+          <>
+            <Button
+              size="small"
+              onClick={() => onEdit(r)}
+              title={t("common:edit")}
+              type="link"
+            >
+              {t("common:edit")}
+            </Button>
+            <Popconfirm
+              onConfirm={() => onDel(r)}
+              title={t("common:confirmDelete")}
+            >
+              <Button size="small" title={t("common:delete")} type="link">
+                {t("common:delete")}
+              </Button>
+            </Popconfirm>
+          </>
         ),
       },
     ],
-    [t, onEdit]
+    [t, onEdit, onDel]
   );
 
   return (

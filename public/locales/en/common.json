@@ -3,6 +3,7 @@
   "reset": "Reset",
   "add": "Add",
   "edit": "Edit",
+  "delete": "Delete",
   "refresh": "Refresh",
   "density": "Density",
   "columnSetting": "Columns Setting",
@@ -18,5 +19,6 @@
   "input": "Input",
   "save": "Save",
   "cancel": "Cancel",
-  "operations": "Operations"
+  "operations": "Operations",
+  "confirmDelete": "Confirm Delete?"
 }
