@@ -1,7 +1,10 @@
 {
-  "tableTitle": "Data List",
-  "tableColName": "Name",
-  "tableColCode": "Code",
+  "table": {
+    "name": "Name",
+    "sex": "Sex",
+    "createDate": "Create Date",
+    "updateDate": "Update Date"
+  },
   "search": {
     "name": "Name",
     "code": "Code",

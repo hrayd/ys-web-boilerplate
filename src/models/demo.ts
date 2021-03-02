@@ -1,5 +1,9 @@
-export interface Demo {
+import { NumberBoolean } from "./common";
+
+export interface IDemo {
   id: string;
   name: string;
-  code: string;
+  sex: NumberBoolean;
+  createDate: number;
+  updateDate: number;
 }

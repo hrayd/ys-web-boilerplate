@@ -1,7 +1,10 @@
 {
-  "tableTitle": "数据列表",
-  "tableColName": "名称",
-  "tableColCode": "编码",
+  "table": {
+    "name": "名称",
+    "sex": "性别",
+    "createDate": "创建时间",
+    "updateDate": "更新时间"
+  },
   "search": {
     "name": "名称",
     "code": "编码",

@@ -11,7 +11,7 @@ i18n
   .init({
     lng: "zh", // 系统语言配置
     fallbackLng: "zh",
-    debug: true,
+    debug: false,
 
     interpolation: {
       escapeValue: false,
