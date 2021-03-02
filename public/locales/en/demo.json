@@ -10,5 +10,11 @@
     "name": "Name",
     "code": "Code",
     "date": "Date"
+  },
+  "form": {
+    "name": "Name",
+    "sex": "Sex",
+    "sex0": "Female",
+    "sex1": "Male"
   }
 }

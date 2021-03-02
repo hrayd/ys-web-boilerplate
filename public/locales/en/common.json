@@ -2,6 +2,7 @@
   "search": "Search",
   "reset": "Reset",
   "add": "Add",
+  "edit": "Edit",
   "refresh": "Refresh",
   "density": "Density",
   "columnSetting": "Columns Setting",
@@ -14,5 +15,8 @@
   "range": "Range",
   "changePassword": "Change Password",
   "logout": "Logout",
-  "input": "Input"
+  "input": "Input",
+  "save": "Save",
+  "cancel": "Cancel",
+  "operations": "Operations"
 }

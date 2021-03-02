@@ -6,14 +6,17 @@ import { IDemo } from "../../models/demo";
 import { DictSex } from "../../constants/dict";
 import YSTable from "../YSTable";
 import { DateFormatString } from "../../constants/strings";
+import { Button } from "antd";
 
 interface Props {
   data: IDemo[];
   loading: boolean;
+  onAdd: () => void;
+  onEdit: (item: IDemo) => void;
 }
 
-const DemoTable: FC<Props> = ({ data, loading }) => {
-  const { t } = useTranslation("demo");
+const DemoTable: FC<Props> = ({ data, loading, onAdd, onEdit }) => {
+  const { t } = useTranslation(["demo", "common"]);
 
   const columns = useMemo(
     () => [
@@ -40,8 +43,22 @@ const DemoTable: FC<Props> = ({ data, loading }) => {
         render: (v: number) => dayjs(v).format(DateFormatString),
         sorter: (a: IDemo, b: IDemo) => a.updateDate - b.updateDate,
       },
+      {
+        title: t("common:operations"),
+        dataIndex: "OPERATIONS",
+        render: (v: unknown, r: IDemo) => (
+          <Button
+            size="small"
+            onClick={() => onEdit(r)}
+            title={t("edit")}
+            type="link"
+          >
+            {t("common:edit")}
+          </Button>
+        ),
+      },
     ],
-    [t]
+    [t, onEdit]
   );
 
   return (
@@ -51,7 +68,7 @@ const DemoTable: FC<Props> = ({ data, loading }) => {
       loading={loading}
       columns={columns}
       tableTitle={t("table.title")}
-      onAdd={() => {}}
+      onAdd={onAdd}
       onReload={() => {}}
     />
   );
