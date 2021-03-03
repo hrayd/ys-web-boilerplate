@@ -4,7 +4,7 @@
  */
 import { ComponentClass, FC, lazy } from "react";
 import Demo from "../components/Demo";
-import { BasicForm } from "../components/DemoForm";
+import { BasicForm, StepForm } from "../components/DemoForm";
 
 const Empty = lazy(() => import("../components/Empty"));
 
@@ -12,7 +12,7 @@ const Empty = lazy(() => import("../components/Empty"));
 const routeConfigs: RouterConfigItem[] = [
   { path: 'page1', component: Demo },
   { path: 'page2', component: BasicForm },
-  { path: 'page3', component: Empty },
+  { path: 'page3', component: StepForm },
   { path: 'page4', component: Empty },
 ];
 
