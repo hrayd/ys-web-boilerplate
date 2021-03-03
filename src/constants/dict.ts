@@ -1,4 +1,5 @@
-export const DictSex = [
-  { id: 0, name: "女" },
-  { id: 1, name: "男" },
-];
+/**
+ * 字典列表，只记录字典取值列表
+ * 名称写在 /public/locales/{lang}/dict.json 目录下
+ */
+export const DictSex = [0, 1];

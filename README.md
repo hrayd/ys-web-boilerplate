@@ -2,8 +2,14 @@
 
 ## !重要
 
+### dayjs的兼容性问题
+
 - DatePicker、TimePicker、Calendar组件需要从 `src/components/YSDatePicker/` 目录引入，直接引入antd组件会出现dayjs的兼容性bug，原因参照 [Antd 官方文档相关说明](https://ant.design/docs/react/replace-moment-cn)。
-- 字符串需提取到 `/public/locales/zh/{moduleName}.json` 文件中，并通过 `react-i18next` 库相关方法引入，可参考 `src/components/Demo` 组件写法，详情参照 `react-i18next` 文档。
+
+### i18n
+
+- [react-i18next 官方文档](https://react.i18next.com/)
+- 字符串需提取到 `/public/locales/{languageName}/{moduleName}.json` 文件中，并通过 `react-i18next` 库相关方法引入，可参考 `src/components/Demo` 组件写法，详情参照 `react-i18next` 文档中的 `useTranslation` 以及 `namespace` 相关用法。
 
 ## Technology Stack
 
@@ -36,13 +42,6 @@
 
 - 组件/模块内部状态：useState、useReducer
 - 全局状态：useContext
-
-### i18n/国际化
-
-- [react-i18next 官方文档](https://react.i18next.com/)
-- 将所有字符串放入 `/public/locales/{lngName}/{moduleName}.json`
-- 开发期间或无国际化要求的项目可只写中文
-- 基本Hooks用法参考 `src/components/Demo/DemoTable.tsx` 
 
 ### 样式
 

@@ -1,21 +1,6 @@
 {
   "table": {
-    "title": "Data List",
-    "name": "Name",
-    "sex": "Sex",
-    "createDate": "Create Date",
-    "updateDate": "Update Date"
-  },
-  "search": {
-    "name": "Name",
-    "code": "Code",
-    "date": "Date"
-  },
-  "form": {
-    "name": "Name",
-    "sex": "Sex",
-    "sex0": "Female",
-    "sex1": "Male"
+    "title": "Data List"
   },
   "name": "Name",
   "sex": "Sex",

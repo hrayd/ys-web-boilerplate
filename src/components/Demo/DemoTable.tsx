@@ -3,7 +3,6 @@ import { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { NumberBoolean } from "../../models/common";
 import { IDemo } from "../../models/demo";
-import { DictSex } from "../../constants/dict";
 import YSTable from "../YSTable";
 import { DateFormatString } from "../../constants/strings";
 import { Button, Popconfirm } from "antd";
@@ -18,29 +17,29 @@ interface Props {
 }
 
 const DemoTable: FC<Props> = ({ data, loading, onAdd, onEdit, onDel, onRefresh }) => {
-  const { t } = useTranslation(["demo", "common"]);
+  const { t } = useTranslation(["demo", "common", "dict"]);
 
   const columns = useMemo(
     () => [
       {
-        title: t("table.name"),
+        title: t("name"),
         dataIndex: "name",
         sorter: (a: IDemo, b: IDemo) => a.name.localeCompare(b.name),
       },
       {
-        title: t("table.sex"),
+        title: t("sex"),
         dataIndex: "sex",
-        render: (v: NumberBoolean) => DictSex.find((d) => d.id === v)?.name,
+        render: (v: NumberBoolean) => t(`dict:sex.${v}`),
         sorter: (a: IDemo, b: IDemo) => a.sex - b.sex,
       },
       {
-        title: t("table.createDate"),
+        title: t("createDate"),
         dataIndex: "createDate",
         render: (v: number) => dayjs(v).format(DateFormatString),
         sorter: (a: IDemo, b: IDemo) => a.createDate - b.createDate,
       },
       {
-        title: t("table.updateDate"),
+        title: t("updateDate"),
         dataIndex: "updateDate",
         render: (v: number) => dayjs(v).format(DateFormatString),
         sorter: (a: IDemo, b: IDemo) => a.updateDate - b.updateDate,

@@ -9,7 +9,7 @@ interface Props {
 }
 
 const DemoSearch: FC<Props> = ({ onSearch }) => {
-  const {t} = useTranslation("demo")
+  const {t} = useTranslation(["demo", "dict"])
   return (
     <YSSearchBar
       items={[
@@ -17,7 +17,7 @@ const DemoSearch: FC<Props> = ({ onSearch }) => {
         { name: "sex", label: t("sex"), render: (
           <Select allowClear placeholder={t("selectSex")}>
             {DictSex.map(d => (
-              <Select.Option key={d.id} value={d.id}>{d.name}</Select.Option>
+              <Select.Option key={d} value={d}>{t(`dict:sex.${d}`)}</Select.Option>
             ))}
           </Select>
         ) },
