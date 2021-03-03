@@ -14,9 +14,10 @@ interface Props {
   onAdd: () => void;
   onEdit: (item: IDemo) => void;
   onDel: (item: IDemo) => void;
+  onRefresh: () => void;
 }
 
-const DemoTable: FC<Props> = ({ data, loading, onAdd, onEdit, onDel }) => {
+const DemoTable: FC<Props> = ({ data, loading, onAdd, onEdit, onDel, onRefresh }) => {
   const { t } = useTranslation(["demo", "common"]);
 
   const columns = useMemo(
@@ -80,7 +81,7 @@ const DemoTable: FC<Props> = ({ data, loading, onAdd, onEdit, onDel }) => {
       columns={columns}
       tableTitle={t("table.title")}
       onAdd={onAdd}
-      onReload={() => {}}
+      onRefresh={onRefresh}
     />
   );
 };

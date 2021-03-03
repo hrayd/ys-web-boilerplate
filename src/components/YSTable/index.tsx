@@ -24,7 +24,7 @@ interface Props<RecordType = any> extends TableProps<RecordType> {
   dataSource: RecordType[];
   tableTitle?: string;
   onAdd?: () => void; // 设置之后展示新建按钮
-  onReload?: () => void; // 设置之后展示刷新按钮
+  onRefresh?: () => void; // 设置之后展示刷新按钮
   showSizeChanger?: boolean;
   // TODO: 设置之后展示列项编辑功能
   showColumnsChanger?: boolean;
@@ -38,7 +38,7 @@ const YSTable: FC<Props> = ({
   dataSource,
   tableTitle,
   onAdd,
-  onReload,
+  onRefresh,
   showSizeChanger = true,
   showColumnsChanger,
   ...tableProps
@@ -87,11 +87,11 @@ const YSTable: FC<Props> = ({
               <PlusOutlined /> {t("add")}
             </Button>
           ) : null}
-          {onReload ? (
+          {onRefresh ? (
             <Tooltip title={t("refresh")}>
               <ReloadOutlined
                 style={{ marginLeft: "1rem", cursor: "pointer" }}
-                onClick={onReload}
+                onClick={onRefresh}
               />
             </Tooltip>
           ) : null}

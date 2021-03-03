@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { StyledContainer } from "../StyledComponents";
 import DemoSearch from "./DemoSearch";
 import DemoTable from "./DemoTable";
@@ -17,16 +17,22 @@ const Demo: FC = () => {
   const [loading, setLoading] = useState(true);
   const [item, setItem] = useState<IDemo>();
   const [formVisible, setFormVisible] = useState(false);
+  const [params, setParams] = useState<Record<string, unknown>>();
 
-  useEffect(() => {
+  const loadData = useCallback(() => {
+    setLoading(true);
     asyncGetDemoData((res) => {
       setLoading(false);
       if (res.isOk) {
         setList(res.data);
       }
     });
-    return () => setList([]);
   }, []);
+
+  useEffect(() => {
+    loadData();
+    return () => setList([]);
+  }, [loadData]);
 
   const onAdd = useCallback(() => {
     setFormVisible(true);
@@ -84,15 +90,36 @@ const Demo: FC = () => {
     [onClose]
   );
 
+  const onSearch = useCallback((newParams?: Record<string, unknown>) => {
+    setParams(newParams);
+  }, []);
+
+  const onRefresh = useCallback(() => loadData(), [loadData]);
+
+  const filteredList = useMemo(() => {
+    if (!params) {
+      return list;
+    }
+    let result = [...list];
+    if (params.name) {
+      result = result.filter(r => r.name.includes(params.name as string));
+    }
+    if (params.sex !== undefined) {
+      result = result.filter(r => r.sex === params.sex);
+    }
+    return result;
+  }, [params, list]);
+
   return (
     <StyledContainer>
-      <DemoSearch />
+      <DemoSearch onSearch={onSearch} />
       <DemoTable
-        data={list}
+        data={filteredList}
         loading={loading}
         onAdd={onAdd}
         onEdit={onEdit}
         onDel={onDel}
+        onRefresh={onRefresh}
       />
       <DemoForm
         visible={formVisible}
