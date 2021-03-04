@@ -4,7 +4,7 @@ import { DatePicker } from "../YSDatePicker";
 
 const StepForm: FC = () => {
   return (
-    <div style={{ padding: "1rem" }}>
+    <div style={{ paddingTop: "1rem" }}>
       <h2>分步表单演示</h2>
       <Divider />
       <div style={{ width: "30vw", margin: "0 auto" }}>
@@ -21,7 +21,12 @@ const StepForm: FC = () => {
             <DatePicker.RangePicker style={{ width: "100%" }} />
           </Form.Item>
           <Form.Item label="分配人员" required>
-            <Select showSearch optionFilterProp="children" mode="multiple" placeholder="请选择人员">
+            <Select
+              showSearch
+              optionFilterProp="children"
+              mode="multiple"
+              placeholder="请选择人员"
+            >
               <Select.Option value="1">张三</Select.Option>
               <Select.Option value="2">李四</Select.Option>
               <Select.Option value="3">王五</Select.Option>
@@ -33,7 +38,9 @@ const StepForm: FC = () => {
           <Form.Item label="备注信息">
             <Input.TextArea placeholder="其他备注信息" />
           </Form.Item>
-          <div style={{ marginLeft: '25%' }}><Button type="primary">下一步</Button></div>
+          <div style={{ marginLeft: "25%" }}>
+            <Button type="primary">下一步</Button>
+          </div>
         </Form>
       </div>
     </div>
