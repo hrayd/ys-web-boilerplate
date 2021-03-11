@@ -2,20 +2,28 @@
  * 使用延迟加载方式引入：
  * const component = lazy(() => import(PATH_TO_COMPONENT));
  */
-import { ComponentClass, FC, lazy } from "react";
+import { ComponentClass, FC, ForwardRefExoticComponent, lazy } from "react";
+import {
+  ControlOutlined,
+  FileProtectOutlined,
+  ScheduleOutlined,
+  BookOutlined,
+  ClusterOutlined,
+  IdcardOutlined,
+  DatabaseOutlined,
+} from "@ant-design/icons";
 
-// const Empty = lazy(() => import("../components/Empty"));
-const Demo = lazy(() => import("../components/Demo"));
-const BasicForm = lazy(() => import("../components/DemoForm/BasicForm"));
-const StepForm = lazy(() => import("../components/DemoForm/StepForm"));
-const ComplexForm = lazy(() => import("../components/DemoForm/ComplexForm"));
+const Empty = lazy(() => import("../components/Empty"));
 
 /** 页面/路由配置 */
 const routeConfigs: RouterConfigItem[] = [
-  { path: "page1", component: Demo },
-  { path: "page2", component: BasicForm },
-  { path: "page3", component: StepForm },
-  { path: "page4", component: ComplexForm },
+  { path: "devices", component: Empty, icon: ControlOutlined },
+  { path: "standards", component: Empty, icon: FileProtectOutlined },
+  { path: "tasks", component: Empty, icon: ScheduleOutlined },
+  { path: "certificates", component: Empty, icon: BookOutlined },
+  { path: "categories", component: Empty, icon: ClusterOutlined },
+  { path: "users", component: Empty, icon: IdcardOutlined },
+  { path: "datum", component: Empty, icon: DatabaseOutlined },
 ];
 
 export const HOME_PATH = "/page1";
@@ -25,4 +33,6 @@ export default routeConfigs;
 interface RouterConfigItem {
   path: string;
   component: FC | ComponentClass;
+  group?: string;
+  icon: ForwardRefExoticComponent<any>;
 }

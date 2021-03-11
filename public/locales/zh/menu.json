@@ -1,6 +1,9 @@
 {
-  "page1": "表格页面",
-  "page2": "简单表单",
-  "page3": "分步表单",
-  "page4": "复杂表单"
+  "devices": "检定设备管理",
+  "standards": "检定标准管理",
+  "tasks": "检定任务管理",
+  "certificates": "检定证书管理",
+  "categories": "设备类别管理",
+  "users": "用户管理",
+  "datum": "数据管理"
 }

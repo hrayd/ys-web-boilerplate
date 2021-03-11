@@ -26,7 +26,7 @@ const Menu: FC<RouteComponentProps> = ({ location }) => {
   const menus = useMemo(() => {
     return routeConfigs.map((c) => {
       return (
-        <AntdMenu.Item style={{ fontSize: "1rem" }} key={c.path}>
+        <AntdMenu.Item key={c.path} icon={<c.icon style={{ fontSize: "1rem" }} />}>
           <Link to={`/${c.path}`}>{t(c.path)}</Link>
         </AntdMenu.Item>
       );
@@ -35,7 +35,7 @@ const Menu: FC<RouteComponentProps> = ({ location }) => {
 
   return (
     <StyledMenu>
-      <AntdMenu mode="inline" selectedKeys={[activity]}>
+      <AntdMenu mode="inline" selectedKeys={[activity]} style={{ fontSize: "1rem" }}>
         {menus}
       </AntdMenu>
     </StyledMenu>
