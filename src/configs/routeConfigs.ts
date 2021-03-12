@@ -12,7 +12,7 @@ import {
   IdcardOutlined,
   DatabaseOutlined,
 } from "@ant-design/icons";
-import UserManagement from "../components/User";
+import UserManagement from "../components/UserManagement";
 
 const Empty = lazy(() => import("../components/Empty"));
 
