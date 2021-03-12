@@ -1,0 +1,12 @@
+{
+  "tableTitle": "用户列表",
+  "name": "姓名",
+  "username": "用户名",
+  "status": "状态",
+  "major": "专业",
+  "department": "部门",
+  "position": "职位",
+  "rule": "身份",
+  "selectStatus": "选择 状态",
+  "selectRule": "选择 身份"
+}

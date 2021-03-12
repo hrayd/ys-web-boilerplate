@@ -25,6 +25,8 @@ interface Props {
   showAll?: boolean; // 不收缩，展示全部
 }
 
+const LINE_COUNT = 4;
+
 const YSSearchBar: FC<Props> = ({
   items,
   onSearch,
@@ -42,7 +44,7 @@ const YSSearchBar: FC<Props> = ({
   }, [params, form]);
 
   const formItems = useMemo(() => {
-    if (showAll || items.length < 4 || showMore) {
+    if (showAll || items.length < LINE_COUNT || showMore) {
       return items.map((item) => {
         const { render, ...formItemProps } = item;
         return (
@@ -54,7 +56,7 @@ const YSSearchBar: FC<Props> = ({
         );
       });
     }
-    return items.slice(0, 3).map((item) => {
+    return items.slice(0, LINE_COUNT - 1).map((item) => {
       const { render, ...formItemProps } = item;
       return (
         <Col span={6} key={item.name}>
@@ -84,7 +86,7 @@ const YSSearchBar: FC<Props> = ({
         paddingBottom: 0,
       }}
       labelCol={{ span: 6 }}
-      wrapperCol={{ span: 18 }}
+      wrapperCol={{ span: 16 }}
     >
       <Row style={{ borderBottom: "1px solid #f0f0f0" }}>
         {formItems}
@@ -100,7 +102,7 @@ const YSSearchBar: FC<Props> = ({
           <Button onClick={onClickReset} title={t("reset")}>
             {t("reset")}
           </Button>
-          {items.length < 4 ? null : (
+          {items.length < LINE_COUNT ? null : (
             <Button
               type="link"
               onClick={() => setShowMore((prev) => !prev)}
