@@ -12,16 +12,23 @@ import {
 import { Button, Dropdown, Menu, message } from "antd";
 import { useTranslation } from "react-i18next";
 import { i18nKey, i18nList } from "../../i18n";
-import LanguageContext from '../../i18n/LanguageContext';
+import LanguageContext from "../../i18n/LanguageContext";
 
-const Header: FC = () => {
+interface Props {
+  showLanguageChange?: boolean;
+}
+
+const Header: FC<Props> = ({ showLanguageChange = false }) => {
   const { t, i18n } = useTranslation("common");
   const { setLanguage } = useContext(LanguageContext);
 
-  const onChangeLanguage = useCallback((newLanguage: i18nKey) => {
-    i18n.changeLanguage(newLanguage);
-    setLanguage(newLanguage);
-  }, [i18n, setLanguage]);
+  const onChangeLanguage = useCallback(
+    (newLanguage: i18nKey) => {
+      i18n.changeLanguage(newLanguage);
+      setLanguage(newLanguage);
+    },
+    [i18n, setLanguage]
+  );
 
   const onLogout = useCallback(() => {
     message.info(t("logout"));
@@ -72,11 +79,13 @@ const Header: FC = () => {
           <DownOutlined />
         </StyledHeaderUser>
       </Dropdown>
-      <Dropdown overlay={i18nOverlay}>
-        <StyledHeaderI18n>
-          <TranslationOutlined />
-        </StyledHeaderI18n>
-      </Dropdown>
+      {showLanguageChange ? (
+        <Dropdown overlay={i18nOverlay}>
+          <StyledHeaderI18n>
+            <TranslationOutlined />
+          </StyledHeaderI18n>
+        </Dropdown>
+      ) : null}
     </StyledHeader>
   );
 };
