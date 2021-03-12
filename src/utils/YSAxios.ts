@@ -60,9 +60,3 @@ export default YSAxios;
 
 export const isOk = (response: AxiosResponse) =>
   response && response.status >= 200 && response.status < 300;
-
-export const callback = (
-  response: AxiosResponse,
-  cb: AsyncCallback,
-  defaultValue?: any
-) => cb({ isOk: isOk(response), data: response?.data || defaultValue });
