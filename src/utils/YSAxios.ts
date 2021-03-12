@@ -6,7 +6,6 @@ import { BASE_URL } from "./apiUtils";
 import { setPreLocation } from "./preLocationUtils";
 import { clearToken, getToken } from "./tokenUtils";
 import history from "./history";
-import { AsyncCallback } from "../models/common";
 
 const YSAxios = axios.create({ baseURL: BASE_URL });
 

@@ -33,33 +33,46 @@ const DemoTable: FC<Props> = ({
       {
         title: t("name"),
         dataIndex: "name",
+        width: "10%",
         sorter: (a: User, b: User) => a.name.localeCompare(b.name),
       },
       {
         title: t("username"),
         dataIndex: "username",
+        width: "10%",
+        sorter: (a: User, b: User) => a.username.localeCompare(b.username),
       },
       {
         title: t("major"),
         dataIndex: "major",
+        width: "10%",
+        sorter: (a: User, b: User) => a.major.localeCompare(b.major),
       },
       {
         title: t("department"),
         dataIndex: "department",
+        width: "10%",
+        sorter: (a: User, b: User) => a.department.localeCompare(b.department),
       },
       {
         title: t("position"),
         dataIndex: "position",
+        width: "10%",
+        sorter: (a: User, b: User) => a.position.localeCompare(b.position),
       },
       {
         title: t("rule"),
         dataIndex: "rule",
+        width: "10%",
         render: (v: RuleValue) => t(`dict:rule.${v}`),
+        sorter: (a: User, b: User) => (a.rule - b.rule),
       },
       {
         title: t("status"),
         dataIndex: "status",
+        width: "10%",
         render: (v: NumberBoolean) => t(`dict:userStatus.${v}`),
+        sorter: (a: User, b: User) => (a.status - b.status),
       },
       {
         title: t("common:operations"),
@@ -102,7 +115,7 @@ const DemoTable: FC<Props> = ({
         ),
       },
     ],
-    [t, onEdit, onDel]
+    [t, onEdit, onDel, onResetPwd, onToggleStatus]
   );
 
   return (
