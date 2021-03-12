@@ -12,6 +12,8 @@ interface Props {
   onEdit: (item: User) => void;
   onDel: (item: User) => void;
   onRefresh: () => void;
+  onToggleStatus: (item: User) => void;
+  onResetPwd: (item: User) => void;
 }
 
 const DemoTable: FC<Props> = ({
@@ -21,6 +23,8 @@ const DemoTable: FC<Props> = ({
   onEdit,
   onDel,
   onRefresh,
+  onToggleStatus,
+  onResetPwd,
 }) => {
   const { t } = useTranslation(["user", "common", "dict"]);
 
@@ -69,6 +73,22 @@ const DemoTable: FC<Props> = ({
               type="link"
             >
               {t("common:edit")}
+            </Button>
+            <Button
+              size="small"
+              onClick={() => onToggleStatus(r)}
+              title={r.status === 1 ? t("freeze") : t("unfreeze")}
+              type="link"
+            >
+              {r.status === 1 ? t("freeze") : t("unfreeze")}
+            </Button>
+            <Button
+              size="small"
+              onClick={() => onResetPwd(r)}
+              title={t("resetPwd")}
+              type="link"
+            >
+              {t("resetPwd")}
             </Button>
             <Popconfirm
               onConfirm={() => onDel(r)}

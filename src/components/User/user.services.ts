@@ -36,6 +36,31 @@ export const asyncDelUser = async (data: User, cb: AsyncCallback<User>) => {
   cb({ isOk: isOk(res), data: res?.data });
 };
 
+export const asyncToggleUserStatus = async (
+  data: User,
+  cb: AsyncCallback<User>
+) => {
+  const newStatus = data.status === 1 ? 0 : 1;
+  const res = await YSAxios.patch(`${api.user}/${data.id}/${newStatus}`).catch(
+    (e) => {
+      message.error(e.message);
+      return e;
+    }
+  );
+  cb({ isOk: isOk(res), data: { ...data, status: newStatus } });
+};
+
+export const asyncResetUserPwd = async (
+  data: User,
+  cb: AsyncCallback<User>
+) => {
+  const res = await YSAxios.get(`${api.user}/${data.id}/reset`).catch((e) => {
+    message.error(e.message);
+    return e;
+  });
+  cb({ isOk: isOk(res), data: res?.data });
+};
+
 export const filterUser = (
   data: User[],
   params: Record<string, unknown>

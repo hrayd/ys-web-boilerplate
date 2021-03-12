@@ -8,5 +8,8 @@
   "position": "职位",
   "rule": "身份",
   "selectStatus": "选择 状态",
-  "selectRule": "选择 身份"
+  "selectRule": "选择 身份",
+  "resetPwd": "重置密码",
+  "freeze": "冻结",
+  "unfreeze": "解冻"
 }

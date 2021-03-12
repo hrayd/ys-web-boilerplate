@@ -8,6 +8,8 @@ import {
   asyncGetUserData,
   asyncPostUser,
   asyncPutUser,
+  asyncResetUserPwd,
+  asyncToggleUserStatus,
   filterUser,
 } from "./user.services";
 import UserForm from "./UserForm";
@@ -97,6 +99,34 @@ const UserManagement: FC = () => {
 
   const onRefresh = useCallback(() => loadData(), [loadData]);
 
+  const onToggleStatus = useCallback((data: User) => {
+    setLoading(true);
+    asyncToggleUserStatus(data, (res) => {
+      setLoading(false);
+      if (res.isOk) {
+        message.success("操作成功");
+        setList((prev) =>
+          prev.map((p) => {
+            if (p.id === data.id) {
+              return res.data;
+            }
+            return p;
+          })
+        );
+      }
+    });
+  }, []);
+
+  const onResetPwd = useCallback((data: User) => {
+    setLoading(true);
+    asyncResetUserPwd(data, (res) => {
+      setLoading(false);
+      if (res.isOk) {
+        message.success("密码重置成功，新密码与用户名相同", 3);
+      }
+    });
+  }, []);
+
   const filteredList = useMemo(() => {
     if (!params || !Object.keys(params).length) {
       return list;
@@ -114,6 +144,8 @@ const UserManagement: FC = () => {
         onEdit={onEdit}
         onDel={onDel}
         onRefresh={onRefresh}
+        onToggleStatus={onToggleStatus}
+        onResetPwd={onResetPwd}
       />
       <UserForm
         visible={formVisible}
