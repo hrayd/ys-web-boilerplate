@@ -23,6 +23,7 @@ interface Props {
   onSearch: (params?: Record<string, unknown>) => void;
   params?: Record<string, unknown>; // 受控搜索栏
   showAll?: boolean; // 不收缩，展示全部
+  name: string; // 模块名，用作DOM Key的前缀，防止公共组件渲染相同的Key
 }
 
 const LINE_COUNT = 4;
@@ -32,6 +33,7 @@ const YSSearchBar: FC<Props> = ({
   onSearch,
   params,
   showAll = false,
+  name,
 }) => {
   const [form] = Form.useForm();
   const [showMore, setShowMore] = useState(false);
@@ -87,6 +89,7 @@ const YSSearchBar: FC<Props> = ({
       }}
       labelCol={{ span: 6 }}
       wrapperCol={{ span: 16 }}
+      name={name}
     >
       <Row style={{ borderBottom: "1px solid #f0f0f0" }}>
         {formItems}

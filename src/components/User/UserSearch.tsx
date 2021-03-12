@@ -34,6 +34,7 @@ const UserSearch: FC<Props> = ({ onSearch }) => {
         { name: "position", label: t("position") },
       ]}
       onSearch={onSearch}
+      name="USER"
     />
   );
 };
