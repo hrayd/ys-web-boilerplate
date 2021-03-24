@@ -13,6 +13,7 @@ import {
   DatabaseOutlined,
 } from "@ant-design/icons";
 import UserManagement from "../components/UserManagement";
+import CategoryContainer from "../components/Category";
 
 const Empty = lazy(() => import("../components/Empty"));
 
@@ -22,7 +23,7 @@ const routeConfigs: RouterConfigItem[] = [
   { path: "standards", component: Empty, icon: FileProtectOutlined },
   { path: "tasks", component: Empty, icon: ScheduleOutlined },
   { path: "certificates", component: Empty, icon: BookOutlined },
-  { path: "categories", component: Empty, icon: ClusterOutlined },
+  { path: "categories", component: CategoryContainer, icon: ClusterOutlined },
   { path: "users", component: UserManagement, icon: IdcardOutlined },
   { path: "datum", component: Empty, icon: DatabaseOutlined },
 ];
