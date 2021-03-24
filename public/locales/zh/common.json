@@ -20,5 +20,9 @@
   "save": "保存",
   "cancel": "取消",
   "operations": "操作",
-  "confirmDelete": "确认删除？"
+  "confirmDelete": "确认删除？",
+  "addSuccess": "新增成功",
+  "editSuccess": "编辑成功",
+  "deleteSuccess": "删除成功",
+  "errorInfo": "操作失败"
 }

@@ -28,8 +28,8 @@ export const asyncPutCategory = async (data: Category, cb: AsyncCallback<Categor
   cb({ isOk: isOk(res), data: res?.data });
 };
 
-export const asyncDelCategory = async (data: Category, cb: AsyncCallback<Category>) => {
-  const res = await YSAxios.delete(`${api.category}/${data.id}`).catch((e) => {
+export const asyncDelCategory = async (id: string, cb: AsyncCallback<Category>) => {
+  const res = await YSAxios.delete(`${api.category}/${id}`).catch((e) => {
     message.error(e.message);
     return e;
   });

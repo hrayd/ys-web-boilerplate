@@ -1,5 +1,5 @@
 import { Button, Dropdown, Tree, Menu } from "antd";
-import { FC, useMemo } from "react";
+import { FC, useCallback, useMemo } from "react";
 import { Category } from "../../models/category";
 import {
   EnvironmentOutlined,
@@ -9,15 +9,20 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import styled from "styled-components";
+import { Modal } from "antd";
 
 interface Props {
   treeData: Category[];
   onSelect: (key?: string) => void;
   selectedId?: string;
+  onAdd: () => void;
+  onEdit: () => void;
+  onDel: () => void;
 }
 
 const TreeNode = Tree.TreeNode;
 
+//#region 生成树
 const getTreeNodes = (list: Category[], pid: null | string) => {
   return list
     .filter((l) => l.pid === pid)
@@ -39,8 +44,16 @@ const getTreeNodes = (list: Category[], pid: null | string) => {
       );
     });
 };
+//#endregion
 
-const CategoryTree: FC<Props> = ({ treeData, onSelect, selectedId }) => {
+const CategoryTree: FC<Props> = ({
+  treeData,
+  onSelect,
+  selectedId,
+  onAdd,
+  onEdit,
+  onDel,
+}) => {
   const tree = useMemo(() => {
     if (treeData.length) {
       return (
@@ -56,24 +69,40 @@ const CategoryTree: FC<Props> = ({ treeData, onSelect, selectedId }) => {
     return null;
   }, [treeData, onSelect]);
 
+  const handleDelete = useCallback(() => {
+    Modal.confirm({
+      title: "确认删除?",
+      content: "如果存在子节点，也将一并删除",
+      onOk: onDel,
+    });
+  }, [onDel]);
+
   const operationsOverlay = useMemo(() => {
     return (
       <Menu>
-        <Menu.Item title="新建">
+        <Menu.Item title="新建" onClick={onAdd}>
           <PlusOutlined />
           新建
         </Menu.Item>
-        <Menu.Item disabled={!selectedId} title={selectedId ? "编辑" : "无选中项"}>
+        <Menu.Item
+          disabled={!selectedId}
+          title={selectedId ? "编辑" : "无选中项"}
+          onClick={onEdit}
+        >
           <EditOutlined />
           编辑
         </Menu.Item>
-        <Menu.Item disabled={!selectedId} title={selectedId ? "删除" : "无选中项"}>
+        <Menu.Item
+          disabled={!selectedId}
+          title={selectedId ? "删除" : "无选中项"}
+          onClick={handleDelete}
+        >
           <DeleteOutlined />
           删除
         </Menu.Item>
       </Menu>
     );
-  }, [selectedId]);
+  }, [selectedId, onAdd, onEdit, handleDelete]);
 
   return (
     <>
