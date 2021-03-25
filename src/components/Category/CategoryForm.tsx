@@ -1,7 +1,7 @@
-import { Form, Input } from "antd";
+import { Form, Input, TreeSelect } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import log from "loglevel";
-import { FC, useCallback, useEffect } from "react";
+import { FC, useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Category } from "../../models/category";
 
@@ -10,23 +10,44 @@ interface Props {
   visible: boolean;
   onSave: (item: Category) => void;
   onClose: () => void;
+  categoryList: Category[];
+  selectedId?: string;
 }
 
-const CategoryForm: FC<Props> = ({ item, visible, onSave, onClose }) => {
+const getTreeData = (dataSource: Category[]) => {
+  return [
+    { id: NULL_PID, title: "无", pId: null },
+    ...dataSource.map((d) => ({ ...d, pId: d.pid, title: d.name })),
+  ];
+};
+
+const NULL_PID = "NULL_PID";
+
+const CategoryForm: FC<Props> = ({
+  item,
+  visible,
+  onSave,
+  onClose,
+  categoryList,
+  selectedId,
+}) => {
   const [form] = Form.useForm();
   const { t } = useTranslation(["category", "common"]);
 
   useEffect(() => {
     if (visible && form) {
-      form.setFieldsValue(item);
+      form.setFieldsValue({
+        ...item,
+        pid: item?.pid || selectedId || NULL_PID,
+      });
     }
-  }, [item, visible, form]);
+  }, [item, visible, form, selectedId]);
 
   const onOk = useCallback(() => {
     form
       .validateFields()
       .then((values) => {
-        onSave(values);
+        onSave({ ...values, pid: values.pid === NULL_PID ? null : values.pid });
       })
       .catch((e) => {
         log.error(e);
@@ -38,6 +59,8 @@ const CategoryForm: FC<Props> = ({ item, visible, onSave, onClose }) => {
     form.resetFields();
   }, [onClose, form]);
 
+  const treeData = useMemo(() => getTreeData(categoryList), [categoryList]);
+
   return (
     <Modal
       visible={visible}
@@ -47,14 +70,22 @@ const CategoryForm: FC<Props> = ({ item, visible, onSave, onClose }) => {
       maskClosable={false}
       title={item ? t("common:edit") : t("common:add")}
     >
-      <Form form={form} wrapperCol={{ offset: 1, span: 16 }} labelCol={{ span: 6 }}>
+      <Form
+        form={form}
+        wrapperCol={{ offset: 1, span: 16 }}
+        labelCol={{ span: 6 }}
+      >
+        <Form.Item name="pid" label={t("pid")} rules={[{ required: true }]}>
+          <TreeSelect
+            treeData={treeData}
+            style={{ width: "100%" }}
+            treeDataSimpleMode
+          />
+        </Form.Item>
         <Form.Item name="name" label={t("name")} rules={[{ required: true }]}>
           <Input />
         </Form.Item>
         <Form.Item name="id" label="ID" hidden>
-          <Input />
-        </Form.Item>
-        <Form.Item name="pid" label="PID" hidden>
           <Input />
         </Form.Item>
       </Form>

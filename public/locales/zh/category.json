@@ -1,4 +1,5 @@
 {
   "name": "类别名称",
+  "pid": "父类别",
   "noSelectedItem": "无选中项"
 }

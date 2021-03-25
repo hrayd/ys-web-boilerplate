@@ -62,8 +62,7 @@ const CategoryContainer: FC = () => {
         }
       });
     } else {
-      const data = { ...item, pid: selectedId || null };
-      asyncPostCategory(data, (res) => {
+      asyncPostCategory(item, (res) => {
         setLoading(false);
         if (res.isOk) {
           setList((prev) => [...prev, res.data]);
@@ -71,7 +70,7 @@ const CategoryContainer: FC = () => {
         }
       });
     }
-  }, [onCloseForm, selectedId]);
+  }, [onCloseForm]);
 
   const onAdd = useCallback(() => setFormVisible(true), []);
 
@@ -116,6 +115,8 @@ const CategoryContainer: FC = () => {
         item={formData}
         onClose={onCloseForm}
         onSave={onSaveForm}
+        categoryList={list}
+        selectedId={selectedId}
       />
     </StyledContainer>
   );
