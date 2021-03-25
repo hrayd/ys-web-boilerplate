@@ -11,7 +11,6 @@ interface Props {
   onCancel: () => void;
 }
 
-// TODO: 解决表单按钮英文问题； 表单添加父节点选择
 const DemoForm: FC<Props> = ({ visible, item, onSave, onCancel }) => {
   const [form] = Form.useForm();
   const { t } = useTranslation(["user", "common"]);

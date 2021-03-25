@@ -1,5 +1,4 @@
-import { Form, Input, TreeSelect } from "antd";
-import Modal from "antd/lib/modal/Modal";
+import { Form, Input, TreeSelect, Modal } from "antd";
 import log from "loglevel";
 import { FC, useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
