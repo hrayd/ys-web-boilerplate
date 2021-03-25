@@ -1,5 +1,7 @@
 {
+  "title": "设备类别",
   "name": "类别名称",
   "pid": "父类别",
-  "noSelectedItem": "无选中项"
+  "noSelectedItem": "无选中项",
+  "deleteInfo": "如果存在子节点，也将一并删除"
 }

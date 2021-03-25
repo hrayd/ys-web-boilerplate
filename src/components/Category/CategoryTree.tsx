@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import styled from "styled-components";
 import { Modal } from "antd";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   treeData: Category[];
@@ -54,6 +55,8 @@ const CategoryTree: FC<Props> = ({
   onEdit,
   onDel,
 }) => {
+  const { t } = useTranslation(["category", "common"]);
+
   const tree = useMemo(() => {
     if (treeData.length) {
       return (
@@ -71,30 +74,30 @@ const CategoryTree: FC<Props> = ({
 
   const handleDelete = useCallback(() => {
     Modal.confirm({
-      title: "确认删除?",
-      content: "如果存在子节点，也将一并删除",
+      title: t("common:confirmDelete"),
+      content: t("deleteInfo"),
       onOk: onDel,
     });
-  }, [onDel]);
+  }, [onDel, t]);
 
   const operationsOverlay = useMemo(() => {
     return (
       <Menu>
-        <Menu.Item title="新建" onClick={onAdd}>
+        <Menu.Item title={t("common:add")} onClick={onAdd}>
           <PlusOutlined />
-          新建
+          {t("common:add")}
         </Menu.Item>
         <Menu.Item
           disabled={!selectedId}
-          title={selectedId ? "编辑" : "无选中项"}
+          title={selectedId ? t("common:edit") : t("noSelectedItem")}
           onClick={onEdit}
         >
           <EditOutlined />
-          编辑
+          {t("common:edit")}
         </Menu.Item>
         <Menu.Item
           disabled={!selectedId}
-          title={selectedId ? "删除" : "无选中项"}
+          title={selectedId ? t("common:delete") : t("noSelectedItem")}
           onClick={handleDelete}
         >
           <DeleteOutlined />
@@ -102,15 +105,15 @@ const CategoryTree: FC<Props> = ({
         </Menu.Item>
       </Menu>
     );
-  }, [selectedId, onAdd, onEdit, handleDelete]);
+  }, [selectedId, onAdd, onEdit, handleDelete, t]);
 
   return (
     <>
       <StyledCategoryHeader>
-        <StyledCategoryTitle>设备类别</StyledCategoryTitle>
+        <StyledCategoryTitle>{t("title")}</StyledCategoryTitle>
         <Dropdown overlay={operationsOverlay}>
           <Button type="link" style={{ float: "right", paddingTop: ".5rem" }}>
-            操作 <DownOutlined />
+            {t("common:operations")} <DownOutlined />
           </Button>
         </Dropdown>
       </StyledCategoryHeader>
