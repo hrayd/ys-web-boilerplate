@@ -1,6 +1,6 @@
 import { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { NumberBoolean, RuleValue } from "../../models/common";
+import { NumberBoolean, Rule } from "../../models/common";
 import { User } from "../../models/user";
 import YSTable from "../YSTable";
 import { Button, Popconfirm } from "antd";
@@ -64,7 +64,7 @@ const DemoTable: FC<Props> = ({
         title: t("rule"),
         dataIndex: "rule",
         width: "10%",
-        render: (v: RuleValue) => t(`dict:rule.${v}`),
+        render: (v: Rule) => t(`dict:rule.${v}`),
         sorter: (a: User, b: User) => (a.rule - b.rule),
       },
       {

@@ -1,7 +1,18 @@
-export type AsyncCallback<T = any> = (data: { isOk: boolean, data: T }) => void;
-
-export type NumberBoolean = 0 | 1;
+export type AsyncCallback<T = any> = (data: { isOk: boolean; data: T }) => void;
 
 export type Dict = { id: number | string; name: string };
 
-export type RuleValue = 0 | 1;
+export enum NumberBoolean {
+  False = 0,
+  True = 1,
+}
+
+export enum Rule {
+  Measurer = 0,
+  Manager = 1,
+}
+
+export enum Sex {
+  Female = 0,
+  Male = 1,
+}

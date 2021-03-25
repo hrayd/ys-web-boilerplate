@@ -1,4 +1,4 @@
-import { NumberBoolean, RuleValue } from "./common";
+import { NumberBoolean, Rule } from "./common";
 
 export interface User {
   id: string;
@@ -8,5 +8,5 @@ export interface User {
   major: string;
   department: string;
   position: string;
-  rule: RuleValue
+  rule: Rule;
 }
