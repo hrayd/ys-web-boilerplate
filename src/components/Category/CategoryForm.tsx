@@ -15,8 +15,13 @@ interface Props {
 
 const getTreeData = (dataSource: Category[]) => {
   return [
-    { id: NULL_PID, title: "无", pId: null },
-    ...dataSource.map((d) => ({ ...d, pId: d.pid, title: d.name })),
+    { id: NULL_PID, value: NULL_PID, title: "无", pId: null },
+    ...dataSource.map((d) => ({
+      ...d,
+      pId: d.pid,
+      title: d.name,
+      value: d.id,
+    })),
   ];
 };
 
