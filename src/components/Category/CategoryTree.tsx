@@ -1,9 +1,8 @@
-import { Button, Dropdown, Tree, Menu } from "antd";
+import { Button, Tree } from "antd";
 import { FC, useCallback, useMemo } from "react";
 import { Category } from "../../models/category";
 import {
   EnvironmentOutlined,
-  DownOutlined,
   PlusOutlined,
   EditOutlined,
   DeleteOutlined,
@@ -80,30 +79,36 @@ const CategoryTree: FC<Props> = ({
     });
   }, [onDel, t]);
 
-  const operationsOverlay = useMemo(() => {
+  const btns = useMemo(() => {
     return (
-      <Menu>
-        <Menu.Item title={t("common:add")} onClick={onAdd}>
-          <PlusOutlined />
+      <>
+        <Button
+          type="link"
+          title={t("common:add")}
+          onClick={onAdd}
+          icon={<PlusOutlined />}
+        >
           {t("common:add")}
-        </Menu.Item>
-        <Menu.Item
-          disabled={!selectedId}
+        </Button>
+        <Button
+          type="link"
           title={selectedId ? t("common:edit") : t("noSelectedItem")}
           onClick={onEdit}
-        >
-          <EditOutlined />
-          {t("common:edit")}
-        </Menu.Item>
-        <Menu.Item
+          icon={<EditOutlined />}
           disabled={!selectedId}
+        >
+          {t("common:edit")}
+        </Button>
+        <Button
+          type="link"
           title={selectedId ? t("common:delete") : t("noSelectedItem")}
           onClick={handleDelete}
+          icon={<DeleteOutlined />}
+          disabled={!selectedId}
         >
-          <DeleteOutlined />
-          删除
-        </Menu.Item>
-      </Menu>
+          {t("common:delete")}
+        </Button>
+      </>
     );
   }, [selectedId, onAdd, onEdit, handleDelete, t]);
 
@@ -111,11 +116,7 @@ const CategoryTree: FC<Props> = ({
     <>
       <StyledCategoryHeader>
         <StyledCategoryTitle>{t("title")}</StyledCategoryTitle>
-        <Dropdown overlay={operationsOverlay}>
-          <Button type="link" style={{ float: "right", paddingTop: ".5rem" }}>
-            {t("common:operations")} <DownOutlined />
-          </Button>
-        </Dropdown>
+        <StyledCategoryBtns>{btns}</StyledCategoryBtns>
       </StyledCategoryHeader>
       {tree}
     </>
@@ -127,11 +128,19 @@ const StyledCategoryHeader = styled.div`
   line-height: 2.5rem;
   border-bottom: 1px dashed grey;
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
 `;
 
 const StyledCategoryTitle = styled.span`
   font-size: 1rem;
   font-weight: 600;
+`;
+
+const StyledCategoryBtns = styled.div`
+  display: inline-block;
+  text-align: right;
+  flex: 1;
 `;
 
 export default CategoryTree;
