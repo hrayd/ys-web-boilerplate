@@ -12,19 +12,20 @@ import {
   IdcardOutlined,
   DatabaseOutlined,
 } from "@ant-design/icons";
-import UserManagement from "../components/UserManagement";
-import CategoryContainer from "../components/Category";
 
 const Empty = lazy(() => import("../components/Empty"));
+const User = lazy(() => import("../components/UserManagement"));
+const Category = lazy(() => import("../components/Category"));
+const Device = lazy(() => import("../components/DeviceManagement"));
 
 /** 页面/路由配置 */
 const routeConfigs: RouterConfigItem[] = [
-  { path: "devices", component: Empty, icon: ControlOutlined },
+  { path: "devices", component: Device, icon: ControlOutlined },
   { path: "standards", component: Empty, icon: FileProtectOutlined },
   { path: "tasks", component: Empty, icon: ScheduleOutlined },
   { path: "certificates", component: Empty, icon: BookOutlined },
-  { path: "categories", component: CategoryContainer, icon: ClusterOutlined },
-  { path: "users", component: UserManagement, icon: IdcardOutlined },
+  { path: "categories", component: Category, icon: ClusterOutlined },
+  { path: "users", component: User, icon: IdcardOutlined },
   { path: "datum", component: Empty, icon: DatabaseOutlined },
 ];
 

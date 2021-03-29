@@ -1,0 +1,15 @@
+{
+  "name": "设备名称",
+  "code": "出厂编号",
+  "model": "规格型号",
+  "manufacturer": "生产厂家",
+  "status": "当前状态",
+  "lastDate": "末次检定时间",
+  "validDate": "有效期",
+  "unit": "责任单位",
+  "person": "责任人",
+  "inspector": "检定员",
+  "remark": "备注",
+  "inspectRecord": "检定记录",
+  "printTag": "打印标签"
+}
