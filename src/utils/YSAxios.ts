@@ -7,6 +7,7 @@ import { setPreLocation } from "./preLocationUtils";
 import { clearToken, getToken } from "./tokenUtils";
 import history from "./history";
 import { AsyncCallback } from "../models/common";
+import log from "loglevel";
 
 const YSAxios = axios.create({ baseURL: BASE_URL });
 
@@ -15,7 +16,7 @@ const onFullFilled = (response: AxiosResponse): AxiosResponse => response;
 
 // Response失败的拦截器，用于错误处理
 const onRejected = (err: any): Promise<void> => {
-  console.error("NETWORK REJECTED: ", `${err}`);
+  log.error("NETWORK REJECTED: ", `${err}`);
   if (err.response && err.response.data && err.response.data.code) {
     const { code, message } = err.response.data;
     err.message = `错误 ${code}: ${message || "Unknown"}`;

@@ -1,3 +1,5 @@
+import log from "loglevel";
+
 const devConfigs = require("../configs/api.dev.json");
 const prodConfigs = require("../configs/api.prod.json");
 
@@ -8,7 +10,7 @@ if (process.env.NODE_ENV === "development") {
 } else if (process.env.NODE_ENV === "production") {
   apiConfigs = prodConfigs.api;
 } else {
-  console.error("Unknown NODE_ENV: ", process.env.NODE_ENV);
+  log.error("Unknown NODE_ENV: ", process.env.NODE_ENV);
 }
 
 const { protocol, ip, port, prefix } = apiConfigs;

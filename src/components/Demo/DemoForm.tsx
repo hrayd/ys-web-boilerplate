@@ -3,6 +3,7 @@ import { Form, Input, Modal, Radio } from "antd";
 import { IDemo } from "../../models/demo";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
+import log from "loglevel";
 
 interface Props {
   visible: boolean;
@@ -37,7 +38,7 @@ const DemoForm: FC<Props> = ({ visible, item, onSave, onCancel }) => {
         });
       })
       .catch((e) => {
-        console.error(e);
+        log.error(e);
       });
   }, [form, onSave]);
 
