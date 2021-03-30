@@ -87,11 +87,16 @@ const DemoTable: FC<Props> = ({
             >
               {t("common:edit")}
             </Button>
-            <Button size="small" title={t("common:detail")} type="link">
-              {t("common:detail")}
-            </Button>
-            <Button size="small" title={t("inspectRecord")} type="link">
+            {/* <Button size="small" title={t("inspectRecord")} type="link">
               {t("inspectRecord")}
+            </Button> */}
+            <Button
+              size="small"
+              onClick={() => onPrintTag(r)}
+              title={t("printTag")}
+              type="link"
+            >
+              {t("printTag")}
             </Button>
             <Popconfirm
               onConfirm={() => onDel(r)}
@@ -101,14 +106,6 @@ const DemoTable: FC<Props> = ({
                 {t("common:delete")}
               </Button>
             </Popconfirm>
-            <Button
-              size="small"
-              onClick={() => onPrintTag(r)}
-              title={t("printTag")}
-              type="link"
-            >
-              {t("printTag")}
-            </Button>
           </>
         ),
       },
