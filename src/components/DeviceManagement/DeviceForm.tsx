@@ -1,7 +1,9 @@
 import { FC, useCallback, useEffect } from "react";
-import { Form, Input, Modal, Radio } from "antd";
+import { Col, Form, Input, Modal, Row, Select } from "antd";
 import { Device } from "../../models/device";
 import { useTranslation } from "react-i18next";
+import { DatePicker } from "../YSDatePicker";
+import { DictDeviceStatus } from "../../constants/dict";
 import dayjs from "dayjs";
 
 interface Props {
@@ -13,11 +15,15 @@ interface Props {
 
 const DemoForm: FC<Props> = ({ visible, item, onSave, onCancel }) => {
   const [form] = Form.useForm();
-  const { t } = useTranslation(["device", "common"]);
+  const { t } = useTranslation(["device", "common", "dict"]);
 
   useEffect(() => {
     if (visible && item && form) {
-      form.setFieldsValue(item);
+      form.setFieldsValue({
+        ...item,
+        lastDate: item.lastDate ? dayjs(item.lastDate) : null,
+        validDate: dayjs(item.validDate),
+      });
     }
   }, [visible, item, form]);
 
@@ -29,11 +35,10 @@ const DemoForm: FC<Props> = ({ visible, item, onSave, onCancel }) => {
     form
       .validateFields()
       .then((values) => {
-        const now = dayjs().valueOf();
         onSave({
           ...values,
-          createDate: values.createDate || now,
-          updateDate: now,
+          lastDate: values.lastDate ? values.lastDate.valueOf() : null,
+          validDate: values.validDate.valueOf(),
         });
       })
       .catch((e) => {
@@ -50,45 +55,113 @@ const DemoForm: FC<Props> = ({ visible, item, onSave, onCancel }) => {
       maskClosable={false}
       forceRender
       title={item ? t("common:edit") : t("common:add")}
+      width={1000}
     >
       <Form
         form={form}
         labelCol={{ span: 6 }}
         wrapperCol={{ offset: 1, span: 15 }}
       >
-        <Form.Item label={t("name")} name="name" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label={t("devicename")}
-          name="devicename"
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item label={t("major")} name="major" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label={t("department")}
-          name="department"
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label={t("position")}
-          name="position"
-          rules={[{ required: true }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item label={t("rule")} name="rule" rules={[{ required: true }]}>
-          <Radio.Group>
-            <Radio value={1}>{t("dict:rule.1")}</Radio>
-            <Radio value={0}>{t("dict:rule.0")}</Radio>
-          </Radio.Group>
-        </Form.Item>
+        <Row>
+          <Col span={12}>
+            <Form.Item
+              label={t("name")}
+              name="name"
+              rules={[{ required: true }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label={t("code")}
+              name="code"
+              rules={[{ required: true }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label={t("model")}
+              name="model"
+              rules={[{ required: true }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label={t("manufacturer")}
+              name="manufacturer"
+              rules={[{ required: true }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label={t("unit")}
+              name="unit"
+              rules={[{ required: true }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label={t("person")}
+              name="person"
+              rules={[{ required: true }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item label={t("lastDate")} name="lastDate">
+              <DatePicker style={{ width: "100%" }} />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label={t("validDate")}
+              name="validDate"
+              rules={[{ required: true }]}
+            >
+              <DatePicker style={{ width: "100%" }} />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label={t("inspector")}
+              name="inspector"
+              rules={[{ required: true }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label={t("status")}
+              name="status"
+              rules={[{ required: true }]}
+            >
+              <Select>
+                {DictDeviceStatus.map((d) => (
+                  <Select.Option key={d} value={d}>
+                    {t(`dict:deviceStatus.${d}`)}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item label={t("remark")} name="remark">
+              <Input.TextArea />
+            </Form.Item>
+          </Col>
+        </Row>
+
         <Form.Item label="id" name="id" hidden>
           <Input />
         </Form.Item>
