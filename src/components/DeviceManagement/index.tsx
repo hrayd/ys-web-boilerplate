@@ -18,6 +18,7 @@ import {
 } from "./device.services";
 import DeviceForm from "./DeviceForm";
 import { message } from "antd";
+import DeviceTag from "./DeviceTag";
 
 const DeviceManagement: FC = () => {
   const [list, setList] = useState<Device[]>([]);
@@ -25,6 +26,7 @@ const DeviceManagement: FC = () => {
   const [item, setItem] = useState<Device>();
   const [formVisible, setFormVisible] = useState(false);
   const [params, setParams] = useState<Record<string, unknown>>();
+  const [tagVisible, setTagVisible] = useState(false);
 
   const loadData = useCallback(() => {
     setLoading(true);
@@ -103,32 +105,14 @@ const DeviceManagement: FC = () => {
 
   const onRefresh = useCallback(() => loadData(), [loadData]);
 
-  const onToggleStatus = useCallback((data: Device) => {
-    setLoading(true);
-    asyncToggleDeviceStatus(data, (res) => {
-      setLoading(false);
-      if (res.isOk) {
-        message.success("操作成功");
-        setList((prev) =>
-          prev.map((p) => {
-            if (p.id === data.id) {
-              return res.data;
-            }
-            return p;
-          })
-        );
-      }
-    });
+  const onPrintTag = useCallback((item: Device) => {
+    setTagVisible(true);
+    setItem(item);
   }, []);
 
-  const onResetPwd = useCallback((data: Device) => {
-    setLoading(true);
-    asyncResetDevicePwd(data, (res) => {
-      setLoading(false);
-      if (res.isOk) {
-        message.success("密码重置成功，新密码与用户名相同", 3);
-      }
-    });
+  const onClosePrintTag = useCallback(() => {
+    setTagVisible(false);
+    setItem(undefined);
   }, []);
 
   const filteredList = useMemo(() => {
@@ -148,8 +132,7 @@ const DeviceManagement: FC = () => {
         onEdit={onEdit}
         onDel={onDel}
         onRefresh={onRefresh}
-        onToggleStatus={onToggleStatus}
-        onResetPwd={onResetPwd}
+        onPrintTag={onPrintTag}
       />
       <DeviceForm
         visible={formVisible}
@@ -157,6 +140,7 @@ const DeviceManagement: FC = () => {
         onSave={onSave}
         onCancel={onClose}
       />
+      <DeviceTag device={item} onClose={onClosePrintTag} visible={tagVisible} />
     </StyledContainer>
   );
 };

@@ -14,8 +14,7 @@ interface Props {
   onEdit: (item: Device) => void;
   onDel: (item: Device) => void;
   onRefresh: () => void;
-  onToggleStatus: (item: Device) => void;
-  onResetPwd: (item: Device) => void;
+  onPrintTag: (item: Device) => void;
 }
 
 const DemoTable: FC<Props> = ({
@@ -25,8 +24,7 @@ const DemoTable: FC<Props> = ({
   onEdit,
   onDel,
   onRefresh,
-  onToggleStatus,
-  onResetPwd,
+  onPrintTag,
 }) => {
   const { t } = useTranslation(["device", "common", "dict"]);
 
@@ -115,7 +113,7 @@ const DemoTable: FC<Props> = ({
             </Popconfirm>
             <Button
               size="small"
-              onClick={() => onEdit(r)}
+              onClick={() => onPrintTag(r)}
               title={t("printTag")}
               type="link"
             >
@@ -125,7 +123,7 @@ const DemoTable: FC<Props> = ({
         ),
       },
     ],
-    [t, onEdit, onDel]
+    [t, onEdit, onDel, onPrintTag]
   );
 
   return (
