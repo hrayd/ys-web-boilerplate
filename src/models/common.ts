@@ -16,3 +16,9 @@ export enum Sex {
   Female = 0,
   Male = 1,
 }
+
+export enum DeviceStatus {
+  Useless = 0,
+  Normal = 1,
+  Using = 2,
+}

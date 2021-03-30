@@ -1,4 +1,5 @@
 {
+  "tableTitle": "检定设备列表",
   "name": "设备名称",
   "code": "出厂编号",
   "model": "规格型号",
@@ -11,5 +12,6 @@
   "inspector": "检定员",
   "remark": "备注",
   "inspectRecord": "检定记录",
-  "printTag": "打印标签"
+  "printTag": "打印标签",
+  "selectStatus": "选择设备状态"
 }

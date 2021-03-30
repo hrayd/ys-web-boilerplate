@@ -39,9 +39,15 @@ const DemoTable: FC<Props> = ({
         sorter: (a: Device, b: Device) => a.name.localeCompare(b.name),
       },
       {
+        title: t("code"),
+        dataIndex: "code",
+        width: "12s%",
+        sorter: (a: Device, b: Device) => a.code.localeCompare(b.code),
+      },
+      {
         title: t("model"),
         dataIndex: "model",
-        width: "10%",
+        width: "12%",
         sorter: (a: Device, b: Device) => a.model.localeCompare(b.model),
       },
       {
@@ -49,14 +55,14 @@ const DemoTable: FC<Props> = ({
         dataIndex: "status",
         width: "8%",
         render: (v: NumberBoolean) => t(`dict:deviceStatus.${v}`),
-        sorter: (a: Device, b: Device) => (a.status - b.status),
+        sorter: (a: Device, b: Device) => a.status - b.status,
       },
       {
         title: t("lastDate"),
         dataIndex: "lastDate",
         width: "12%",
         render: (v: number) => dayjs(v).format(DateFormatString),
-        sorter: (a: Device, b: Device) => (a.lastDate-b.lastDate),
+        sorter: (a: Device, b: Device) => a.lastDate - b.lastDate,
       },
       {
         title: t("unit"),
@@ -119,7 +125,7 @@ const DemoTable: FC<Props> = ({
         ),
       },
     ],
-    [t, onEdit, onDel, onResetPwd, onToggleStatus]
+    [t, onEdit, onDel]
   );
 
   return (

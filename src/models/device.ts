@@ -1,4 +1,4 @@
-import { NumberBoolean } from "./common";
+import { DeviceStatus } from "./common";
 
 export interface Device {
   id: string;
@@ -6,7 +6,7 @@ export interface Device {
   code: string;
   model: string;
   manufacturer: string;
-  status: NumberBoolean;
+  status: DeviceStatus;
   lastDate: number;
   validDate: number;
   unit: string;
