@@ -87,20 +87,10 @@ const DemoTable: FC<Props> = ({
             >
               {t("common:edit")}
             </Button>
-            <Button
-              size="small"
-              onClick={() => onEdit(r)}
-              title={t("common:detail")}
-              type="link"
-            >
+            <Button size="small" title={t("common:detail")} type="link">
               {t("common:detail")}
             </Button>
-            <Button
-              size="small"
-              onClick={() => onEdit(r)}
-              title={t("inspectRecord")}
-              type="link"
-            >
+            <Button size="small" title={t("inspectRecord")} type="link">
               {t("inspectRecord")}
             </Button>
             <Popconfirm
