@@ -4,6 +4,7 @@ import { NumberBoolean, Rule } from "../../models/common";
 import { User } from "../../models/user";
 import YSTable from "../YSTable";
 import { Button, Popconfirm } from "antd";
+import useStandards from "../../data/useStandards";
 
 interface Props {
   data: User[];
@@ -27,6 +28,7 @@ const DemoTable: FC<Props> = ({
   onResetPwd,
 }) => {
   const { t } = useTranslation(["user", "common", "dict"]);
+  const { data: standardList, error: standardError } = useStandards();
 
   const columns = useMemo(
     () => [
@@ -46,6 +48,8 @@ const DemoTable: FC<Props> = ({
         title: t("major"),
         dataIndex: "major",
         width: "10%",
+        render: (v: string) =>
+          standardError ? v : standardList.find((s) => s.id === v)?.name,
         sorter: (a: User, b: User) => a.major.localeCompare(b.major),
       },
       {
@@ -65,14 +69,14 @@ const DemoTable: FC<Props> = ({
         dataIndex: "rule",
         width: "10%",
         render: (v: Rule) => t(`dict:rule.${v}`),
-        sorter: (a: User, b: User) => (a.rule - b.rule),
+        sorter: (a: User, b: User) => a.rule - b.rule,
       },
       {
         title: t("status"),
         dataIndex: "status",
         width: "10%",
         render: (v: NumberBoolean) => t(`dict:userStatus.${v}`),
-        sorter: (a: User, b: User) => (a.status - b.status),
+        sorter: (a: User, b: User) => a.status - b.status,
       },
       {
         title: t("common:operations"),
@@ -115,7 +119,7 @@ const DemoTable: FC<Props> = ({
         ),
       },
     ],
-    [t, onEdit, onDel, onResetPwd, onToggleStatus]
+    [t, onEdit, onDel, onResetPwd, onToggleStatus, standardList, standardError]
   );
 
   return (

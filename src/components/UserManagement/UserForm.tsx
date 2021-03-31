@@ -1,8 +1,9 @@
 import { FC, useCallback, useEffect } from "react";
-import { Form, Input, Modal, Radio } from "antd";
+import { Form, Input, Modal, Radio, Select } from "antd";
 import { User } from "../../models/user";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
+import useStandards from "../../data/useStandards";
 
 interface Props {
   visible: boolean;
@@ -14,6 +15,7 @@ interface Props {
 const DemoForm: FC<Props> = ({ visible, item, onSave, onCancel }) => {
   const [form] = Form.useForm();
   const { t } = useTranslation(["user", "common"]);
+  const { data: standardList } = useStandards();
 
   useEffect(() => {
     if (visible && item && form) {
@@ -67,7 +69,13 @@ const DemoForm: FC<Props> = ({ visible, item, onSave, onCancel }) => {
           <Input />
         </Form.Item>
         <Form.Item label={t("major")} name="major" rules={[{ required: true }]}>
-          <Input />
+          <Select showSearch optionFilterProp="children">
+            {standardList.map((s) => (
+              <Select.Option key={s.id} value={s.id}>
+                {s.name}
+              </Select.Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item
           label={t("department")}
