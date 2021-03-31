@@ -1,15 +1,11 @@
 import { Button, Tree } from "antd";
 import { FC, useCallback, useMemo } from "react";
 import { Category } from "../../models/category";
-import {
-  EnvironmentOutlined,
-  PlusOutlined,
-  EditOutlined,
-  DeleteOutlined,
-} from "@ant-design/icons";
+import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { Modal } from "antd";
 import { useTranslation } from "react-i18next";
+import useStandards from "../../data/useStandards";
 
 interface Props {
   treeData: Category[];
@@ -34,14 +30,7 @@ const getTreeNodes = (list: Category[], pid: null | string) => {
           </TreeNode>
         );
       }
-      return (
-        <TreeNode
-          key={lm.id}
-          title={lm.name}
-          isLeaf
-          icon={<EnvironmentOutlined />}
-        />
-      );
+      return <TreeNode key={lm.id} title={lm.name} isLeaf />;
     });
 };
 //#endregion
@@ -55,21 +44,26 @@ const CategoryTree: FC<Props> = ({
   onDel,
 }) => {
   const { t } = useTranslation(["category", "common"]);
+  const { data: standardList } = useStandards();
 
   const tree = useMemo(() => {
-    if (treeData.length) {
-      return (
-        <Tree
-          defaultExpandAll
-          showIcon
-          onSelect={(keys) => onSelect(keys[0] as string | undefined)}
-        >
-          {getTreeNodes(treeData, null)}
-        </Tree>
-      );
+    if (!standardList?.length) {
+      return null;
     }
-    return null;
-  }, [treeData, onSelect]);
+    const treeDataWithStandards = [
+      ...treeData,
+      ...standardList.map((s) => ({ ...s, pid: null } as Category)),
+    ];
+    return (
+      <Tree
+        showIcon
+        defaultExpandAll
+        onSelect={(keys) => onSelect(keys[0] as string | undefined)}
+      >
+        {getTreeNodes(treeDataWithStandards, null)}
+      </Tree>
+    );
+  }, [treeData, onSelect, standardList]);
 
   const handleDelete = useCallback(() => {
     Modal.confirm({
