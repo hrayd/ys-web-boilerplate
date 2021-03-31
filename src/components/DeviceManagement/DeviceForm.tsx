@@ -1,10 +1,11 @@
 import { FC, useCallback, useEffect } from "react";
-import { Col, Form, Input, Modal, Row, Select } from "antd";
+import { Col, Form, Input, Modal, Row, Select, TreeSelect } from "antd";
 import { Device } from "../../models/device";
 import { useTranslation } from "react-i18next";
 import { DatePicker } from "../YSDatePicker";
 import { DictDeviceStatus } from "../../constants/dict";
 import dayjs from "dayjs";
+import useCategoryTreeData from "../../data/useCategoryTreeData";
 
 interface Props {
   visible: boolean;
@@ -16,6 +17,7 @@ interface Props {
 const DemoForm: FC<Props> = ({ visible, item, onSave, onCancel }) => {
   const [form] = Form.useForm();
   const { t } = useTranslation(["device", "common", "dict"]);
+  const { data: categoryTreeData } = useCategoryTreeData();
 
   useEffect(() => {
     if (visible && item && form) {
@@ -39,12 +41,13 @@ const DemoForm: FC<Props> = ({ visible, item, onSave, onCancel }) => {
           ...values,
           lastDate: values.lastDate ? values.lastDate.valueOf() : null,
           validDate: values.validDate.valueOf(),
+          name: categoryTreeData.find((c) => c.id === values.name)?.name,
         });
       })
       .catch((e) => {
         console.error(e);
       });
-  }, [form, onSave]);
+  }, [form, onSave, categoryTreeData]);
 
   return (
     <Modal
@@ -69,7 +72,11 @@ const DemoForm: FC<Props> = ({ visible, item, onSave, onCancel }) => {
               name="name"
               rules={[{ required: true }]}
             >
-              <Input />
+              <TreeSelect
+                treeDataSimpleMode
+                treeData={categoryTreeData}
+                treeDefaultExpandAll
+              />
             </Form.Item>
           </Col>
           <Col span={12}>

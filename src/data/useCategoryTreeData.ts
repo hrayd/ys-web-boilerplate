@@ -28,7 +28,7 @@ const fetcher = async () => {
 
 const useCategoryTreeData = () => {
   const { data, error } = useSWR<Category[]>(api.category, fetcher);
-  return { data, error };
+  return { data: data || [], error };
 };
 
 export default useCategoryTreeData;
