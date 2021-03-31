@@ -2,6 +2,7 @@ import { Form, Input, TreeSelect, Modal } from "antd";
 import log from "loglevel";
 import { FC, useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import useStandards from "../../data/useStandards";
 import { Category } from "../../models/category";
 
 interface Props {
@@ -15,7 +16,6 @@ interface Props {
 
 const getTreeData = (dataSource: Category[]) => {
   return [
-    { id: NULL_PID, value: NULL_PID, title: "无", pId: null },
     ...dataSource.map((d) => ({
       ...d,
       pId: d.pid,
@@ -24,8 +24,6 @@ const getTreeData = (dataSource: Category[]) => {
     })),
   ];
 };
-
-const NULL_PID = "NULL_PID";
 
 const CategoryForm: FC<Props> = ({
   item,
@@ -37,12 +35,13 @@ const CategoryForm: FC<Props> = ({
 }) => {
   const [form] = Form.useForm();
   const { t } = useTranslation(["category", "common"]);
+  const { data: standardList } = useStandards();
 
   useEffect(() => {
     if (visible && form) {
       form.setFieldsValue({
         ...item,
-        pid: item?.pid || selectedId || NULL_PID,
+        pid: item?.pid || selectedId,
       });
     }
   }, [item, visible, form, selectedId]);
@@ -51,7 +50,7 @@ const CategoryForm: FC<Props> = ({
     form
       .validateFields()
       .then((values) => {
-        onSave({ ...values, pid: values.pid === NULL_PID ? null : values.pid });
+        onSave(values);
       })
       .catch((e) => {
         log.error(e);
@@ -63,7 +62,14 @@ const CategoryForm: FC<Props> = ({
     form.resetFields();
   }, [onClose, form]);
 
-  const treeData = useMemo(() => getTreeData(categoryList), [categoryList]);
+  const treeData = useMemo(
+    () =>
+      getTreeData([
+        ...categoryList,
+        ...standardList.map((s) => ({ ...s, pid: null } as Category)),
+      ]),
+    [categoryList, standardList]
+  );
 
   return (
     <Modal
