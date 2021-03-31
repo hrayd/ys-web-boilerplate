@@ -14,6 +14,7 @@ import {
   asyncGetCategoryData,
   asyncPostCategory,
   asyncPutCategory,
+  getCategoryTreeData,
 } from "./category.services";
 import CategoryForm from "./CategoryForm";
 import CategoryTree from "./CategoryTree";
@@ -106,13 +107,10 @@ const CategoryContainer: FC = () => {
     }
   }, [selectedId, t]);
 
-  const treeDataWithStandard = useMemo(() => {
-    if (!standardList.length) return [];
-    return [
-      ...list,
-      ...standardList.map((s) => ({ ...s, pid: null } as Category)),
-    ];
-  }, [standardList, list]);
+  const treeDataWithStandard = useMemo(
+    () => getCategoryTreeData(standardList, list),
+    [standardList, list]
+  );
 
   return (
     <StyledContainer direction="row">
