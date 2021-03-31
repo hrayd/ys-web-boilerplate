@@ -5,7 +5,6 @@ import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { Modal } from "antd";
 import { useTranslation } from "react-i18next";
-import useStandards from "../../data/useStandards";
 
 interface Props {
   treeData: Category[];
@@ -14,6 +13,8 @@ interface Props {
   onAdd: () => void;
   onEdit: () => void;
   onDel: () => void;
+  expandKeys: string[];
+  onExpand: (keys: string[]) => void;
 }
 
 const TreeNode = Tree.TreeNode;
@@ -42,28 +43,27 @@ const CategoryTree: FC<Props> = ({
   onAdd,
   onEdit,
   onDel,
+  expandKeys,
+  onExpand,
 }) => {
   const { t } = useTranslation(["category", "common"]);
-  const { data: standardList } = useStandards();
 
-  const tree = useMemo(() => {
-    if (!standardList?.length) {
-      return null;
-    }
-    const treeDataWithStandards = [
-      ...treeData,
-      ...standardList.map((s) => ({ ...s, pid: null } as Category)),
-    ];
-    return (
-      <Tree
-        showIcon
-        defaultExpandAll
-        onSelect={(keys) => onSelect(keys[0] as string | undefined)}
-      >
-        {getTreeNodes(treeDataWithStandards, null)}
-      </Tree>
-    );
-  }, [treeData, onSelect, standardList]);
+  // const tree = useMemo(() => {
+  //   if (!treeData.length) {
+  //     return null;
+  //   }
+  //   return (
+  //     <Tree
+  //       showIcon
+  //       defaultExpandAll
+  //       onSelect={(keys) => onSelect(keys[0] as string | undefined)}
+  //       expandedKeys={expandKeys}
+  //       onExpand={(keys) => onExpand(keys as string[])}
+  //     >
+  //       {getTreeNodes(treeData, null)}
+  //     </Tree>
+  //   );
+  // }, [treeData, onSelect, expandKeys, onExpand]);
 
   const handleDelete = useCallback(() => {
     Modal.confirm({
@@ -112,7 +112,15 @@ const CategoryTree: FC<Props> = ({
         <StyledCategoryTitle>{t("title")}</StyledCategoryTitle>
         <StyledCategoryBtns>{btns}</StyledCategoryBtns>
       </StyledCategoryHeader>
-      {tree}
+      <Tree
+        showIcon
+        defaultExpandAll
+        onSelect={(keys) => onSelect(keys[0] as string | undefined)}
+        expandedKeys={expandKeys}
+        onExpand={(keys) => onExpand(keys as string[])}
+      >
+        {getTreeNodes(treeData, null)}
+      </Tree>
     </>
   );
 };

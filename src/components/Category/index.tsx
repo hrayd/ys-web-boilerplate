@@ -3,9 +3,10 @@
  * @author donghui
  */
 import { message, Spin } from "antd";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import useStandards from "../../data/useStandards";
 import { Category } from "../../models/category";
 import { StyledContainer } from "../StyledComponents";
 import {
@@ -23,7 +24,13 @@ const CategoryContainer: FC = () => {
   const [formVisible, setFormVisible] = useState(false);
   const [formData, setFormData] = useState<Category>();
   const [loading, setLoading] = useState(false);
+  const [expandKeys, setExpandKeys] = useState<string[]>([]);
+  const { data: standardList } = useStandards();
   const { t } = useTranslation("common");
+
+  useEffect(() => {
+    setExpandKeys((prev) => [...prev, ...standardList.map((s) => `${s.id}`)]);
+  }, [standardList]);
 
   const loadList = useCallback(() => {
     setLoading(true);
@@ -31,6 +38,7 @@ const CategoryContainer: FC = () => {
       setLoading(false);
       if (res.isOk) {
         setList(res.data);
+        setExpandKeys((prev) => [...prev, ...res.data.map((d) => d.id)]);
       }
     });
   }, []);
@@ -98,17 +106,27 @@ const CategoryContainer: FC = () => {
     }
   }, [selectedId, t]);
 
+  const treeDataWithStandard = useMemo(() => {
+    if (!standardList.length) return [];
+    return [
+      ...list,
+      ...standardList.map((s) => ({ ...s, pid: null } as Category)),
+    ];
+  }, [standardList, list]);
+
   return (
     <StyledContainer direction="row">
       <StyledTree>
         <Spin spinning={loading}>
           <CategoryTree
-            treeData={list}
+            treeData={treeDataWithStandard}
             onSelect={setSelectedId}
             selectedId={selectedId}
             onAdd={onAdd}
             onEdit={onEdit}
             onDel={onDel}
+            expandKeys={expandKeys}
+            onExpand={setExpandKeys}
           />
         </Spin>
       </StyledTree>
