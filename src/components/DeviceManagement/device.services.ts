@@ -46,31 +46,6 @@ export const asyncDelDevice = async (
   cb({ isOk: isOk(res), data: res?.data });
 };
 
-export const asyncToggleDeviceStatus = async (
-  data: Device,
-  cb: AsyncCallback<Device>
-) => {
-  const newStatus = data.status === 1 ? 0 : 1;
-  const res = await YSAxios.patch(
-    `${api.device}/${data.id}/${newStatus}`
-  ).catch((e) => {
-    message.error(e.message);
-    return e;
-  });
-  cb({ isOk: isOk(res), data: { ...data, status: newStatus } });
-};
-
-export const asyncResetDevicePwd = async (
-  data: Device,
-  cb: AsyncCallback<Device>
-) => {
-  const res = await YSAxios.get(`${api.device}/${data.id}/reset`).catch((e) => {
-    message.error(e.message);
-    return e;
-  });
-  cb({ isOk: isOk(res), data: res?.data });
-};
-
 // 查询过滤方法
 export const filterDevice = (
   data: Device[],

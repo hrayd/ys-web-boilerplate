@@ -12,8 +12,6 @@ import {
   asyncGetDeviceData,
   asyncPostDevice,
   asyncPutDevice,
-  asyncResetDevicePwd,
-  asyncToggleDeviceStatus,
   filterDevice,
 } from "./device.services";
 import DeviceForm from "./DeviceForm";
