@@ -44,39 +44,42 @@ const CategoryContainer: FC = () => {
     setFormData(undefined);
   }, []);
 
-  const onSaveForm = useCallback((item: Category) => {
-    setLoading(true);
-    if (item.id) {
-      asyncPutCategory(item, (res) => {
-        setLoading(false);
-        if (res.isOk) {
-          onCloseForm();
-          setList((prev) =>
-            prev.map((pm) => {
-              if (pm.id === item.id) {
-                return res.data;
-              }
-              return pm;
-            })
-          );
-        }
-      });
-    } else {
-      asyncPostCategory(item, (res) => {
-        setLoading(false);
-        if (res.isOk) {
-          setList((prev) => [...prev, res.data]);
-          onCloseForm();
-        }
-      });
-    }
-  }, [onCloseForm]);
+  const onSaveForm = useCallback(
+    (item: Category) => {
+      setLoading(true);
+      if (item.id) {
+        asyncPutCategory(item, (res) => {
+          setLoading(false);
+          if (res.isOk) {
+            onCloseForm();
+            setList((prev) =>
+              prev.map((pm) => {
+                if (pm.id === item.id) {
+                  return res.data;
+                }
+                return pm;
+              })
+            );
+          }
+        });
+      } else {
+        asyncPostCategory(item, (res) => {
+          setLoading(false);
+          if (res.isOk) {
+            setList((prev) => [...prev, res.data]);
+            onCloseForm();
+          }
+        });
+      }
+    },
+    [onCloseForm]
+  );
 
   const onAdd = useCallback(() => setFormVisible(true), []);
 
   const onEdit = useCallback(() => {
     if (selectedId) {
-      setFormData(list.find(lf => lf.id === selectedId));
+      setFormData(list.find((lf) => lf.id === selectedId));
       setFormVisible(true);
     }
   }, [list, selectedId]);
@@ -84,16 +87,16 @@ const CategoryContainer: FC = () => {
   const onDel = useCallback(() => {
     if (selectedId) {
       setLoading(true);
-      asyncDelCategory(selectedId, res => {
+      asyncDelCategory(selectedId, (res) => {
         if (res.isOk) {
           message.success(t("deleteSuccess"));
-          setList(prev => prev.filter(pf => pf.id !== selectedId))
+          setList((prev) => prev.filter((pf) => pf.id !== selectedId));
           setSelectedId(undefined);
           setLoading(false);
         }
-      })
+      });
     }
-  }, [selectedId,t]);
+  }, [selectedId, t]);
 
   return (
     <StyledContainer direction="row">
