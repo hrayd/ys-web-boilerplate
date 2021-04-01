@@ -1,0 +1,16 @@
+{
+  "tableName": "检定标准列表",
+  "standard": "标准名称",
+  "name": "仪器名称",
+  "model": "规格型号",
+  "code": "出厂编号",
+  "manufacturer": "生产厂家",
+  "status": "当前状态",
+  "unit": "责任单位",
+  "person": "责任人",
+  "lastTraceUnit": "末次溯源单位",
+  "lastTraceDate": "末次溯源时间",
+  "lastTraceCode": "末次溯源证书编号",
+  "validDate": "有效期",
+  "remark": "备注"
+}

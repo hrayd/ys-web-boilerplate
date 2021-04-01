@@ -17,11 +17,12 @@ const Empty = lazy(() => import("../components/Empty"));
 const User = lazy(() => import("../components/UserManagement"));
 const Category = lazy(() => import("../components/Category"));
 const Device = lazy(() => import("../components/DeviceManagement"));
+const Instrument = lazy(() => import("../components/InstrumentManagement"));
 
 /** 页面/路由配置 */
 const routeConfigs: RouterConfigItem[] = [
   { path: "devices", component: Device, icon: ControlOutlined },
-  { path: "standards", component: Empty, icon: FileProtectOutlined },
+  { path: "standards", component: Instrument, icon: FileProtectOutlined },
   { path: "tasks", component: Empty, icon: ScheduleOutlined },
   { path: "certificates", component: Empty, icon: BookOutlined },
   { path: "categories", component: Category, icon: ClusterOutlined },

@@ -1,4 +1,4 @@
-import { DeviceStatus, Sex } from "../models/common";
+import { DeviceStatus, InstrumentStatus, Sex } from "../models/common";
 
 /**
  * 字典列表，只记录字典取值列表
@@ -10,4 +10,10 @@ export const DictDeviceStatus = [
   DeviceStatus.Normal,
   DeviceStatus.Using,
   DeviceStatus.Useless,
+];
+
+export const DictInstrumentStatus = [
+  InstrumentStatus.Normal,
+  InstrumentStatus.Using,
+  InstrumentStatus.Useless,
 ];

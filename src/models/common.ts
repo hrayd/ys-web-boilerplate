@@ -22,3 +22,9 @@ export enum DeviceStatus {
   Normal = 1,
   Using = 2,
 }
+
+export enum InstrumentStatus {
+  Useless = 0,
+  Normal = 1,
+  Using = 2,
+}
