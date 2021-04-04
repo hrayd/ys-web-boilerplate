@@ -2,7 +2,6 @@
 import Avatar from "antd/lib/avatar/avatar";
 import { FC, useCallback, useContext } from "react";
 import styled from "styled-components";
-import pkg from "../../../package.json";
 import icon from "../../assets/icon.png";
 import {
   UserOutlined,
@@ -12,16 +11,19 @@ import {
 import { Button, Dropdown, Menu, message } from "antd";
 import { useTranslation } from "react-i18next";
 import { i18nKey, i18nList } from "../../i18n";
-import LanguageContext from '../../i18n/LanguageContext';
+import LanguageContext from "../../i18n/LanguageContext";
 
 const Header: FC = () => {
   const { t, i18n } = useTranslation("common");
   const { setLanguage } = useContext(LanguageContext);
 
-  const onChangeLanguage = useCallback((newLanguage: i18nKey) => {
-    i18n.changeLanguage(newLanguage);
-    setLanguage(newLanguage);
-  }, [i18n, setLanguage]);
+  const onChangeLanguage = useCallback(
+    (newLanguage: i18nKey) => {
+      i18n.changeLanguage(newLanguage);
+      setLanguage(newLanguage);
+    },
+    [i18n, setLanguage]
+  );
 
   const onLogout = useCallback(() => {
     message.info(t("logout"));
@@ -60,7 +62,7 @@ const Header: FC = () => {
   return (
     <StyledHeader>
       <StyledHeaderIcon />
-      <StyledHeaderTitle>{pkg.description}</StyledHeaderTitle>
+      <StyledHeaderTitle>{t("APP_TITLE")}</StyledHeaderTitle>
       <Dropdown overlay={userOverlay}>
         <StyledHeaderUser>
           <Avatar
