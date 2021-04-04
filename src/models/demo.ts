@@ -1,9 +1,9 @@
-import { NumberBoolean } from "./common";
+import { Sex } from "./dict";
 
 export interface IDemo {
   id: string;
   name: string;
-  sex: NumberBoolean;
+  sex: Sex;
   createDate: number;
   updateDate: number;
 }

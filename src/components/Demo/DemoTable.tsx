@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
 import { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { NumberBoolean } from "../../models/common";
 import { IDemo } from "../../models/demo";
 import YSTable from "../YSTable";
 import { DateFormatString } from "../../constants/strings";
 import { Button, Popconfirm } from "antd";
+import { Sex } from "../../models/dict";
 
 interface Props {
   data: IDemo[];
@@ -16,7 +16,14 @@ interface Props {
   onRefresh: () => void;
 }
 
-const DemoTable: FC<Props> = ({ data, loading, onAdd, onEdit, onDel, onRefresh }) => {
+const DemoTable: FC<Props> = ({
+  data,
+  loading,
+  onAdd,
+  onEdit,
+  onDel,
+  onRefresh,
+}) => {
   const { t } = useTranslation(["demo", "common", "dict"]);
 
   const columns = useMemo(
@@ -29,7 +36,7 @@ const DemoTable: FC<Props> = ({ data, loading, onAdd, onEdit, onDel, onRefresh }
       {
         title: t("sex"),
         dataIndex: "sex",
-        render: (v: NumberBoolean) => t(`dict:sex.${v}`),
+        render: (v: Sex) => t(`dict:sex.${v}`),
         sorter: (a: IDemo, b: IDemo) => a.sex - b.sex,
       },
       {
