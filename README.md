@@ -2,7 +2,7 @@
 
 ## Technology Stack
 
-- react：based on `create-react-app`
+- react: created by `create-react-app`
 - typescript
 - ant-design
 - styled-component
@@ -25,14 +25,18 @@
   - config.js 导出配置文件
   - locales 国际化配置文件
 - src
-  - api：api 索引
   - assets：代码中使用的静态资源如图片、语音等
   - components：组件
     - 公共组件名称以 `YS` 开头
   - configs：项目配置：路由、菜单等
+    - api.ts api 配置
+    - api.dev.json 开发环境配置
+    - api.prod.json 生产环境配置
+    - routeConfigs.ts 菜单-路由-组件配置
   - models：实体 Interface 或 Types
   - pages：独立页面
   - utils：工具类
+  - data：基于 `SWR` 的公共数据请求管理
 
 ## Tips
 

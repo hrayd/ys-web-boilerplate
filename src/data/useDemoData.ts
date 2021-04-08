@@ -7,7 +7,7 @@ import api from "../configs/api";
 import { IDemo } from "../models/demo";
 import YSAxios from "../utils/YSAxios";
 
-const useDemo = (params?: Record<string, unknown>) => {
+const useDemoData = (params?: Record<string, unknown>) => {
   const { data, error } = useSWR<IDemo[]>(api.demo, (url) =>
     YSAxios.get(url, { params }).then((res) => res.data)
   );
@@ -19,4 +19,4 @@ const useDemo = (params?: Record<string, unknown>) => {
   };
 };
 
-export default useDemo;
+export default useDemoData;
