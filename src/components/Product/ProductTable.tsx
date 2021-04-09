@@ -15,6 +15,7 @@ interface Props {
   onEdit: (item: Product) => void;
   onDel: (item: Product) => void;
   onRefresh: () => void;
+  onModel: (item: Product) => void;
 }
 
 const ProductTable: FC<Props> = ({
@@ -24,6 +25,7 @@ const ProductTable: FC<Props> = ({
   onEdit,
   onDel,
   onRefresh,
+  onModel,
 }) => {
   const { t } = useTranslation(["product", "common"]);
 
@@ -66,7 +68,12 @@ const ProductTable: FC<Props> = ({
             >
               {t("common:edit")}
             </Button>
-            <Button size="small" title={t("model")} type="link">
+            <Button
+              size="small"
+              title={t("model")}
+              type="link"
+              onClick={() => onModel(r)}
+            >
               {t("model")}
             </Button>
             <Popconfirm
@@ -81,7 +88,7 @@ const ProductTable: FC<Props> = ({
         ),
       },
     ],
-    [t, onEdit, onDel]
+    [t, onEdit, onDel, onModel]
   );
 
   return (

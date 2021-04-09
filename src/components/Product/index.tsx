@@ -6,7 +6,7 @@ import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { StyledContainer } from "../StyledComponents";
 import ProductSearch from "./ProductSearch";
 import ProductTable from "./ProductTable";
-import { Product } from "../../models/product";
+import { Product, ProductModel } from "../../models/product";
 import {
   asyncDelProduct,
   asyncGetProductData,
@@ -15,6 +15,7 @@ import {
 } from "./product.services";
 import ProductForm from "./ProductForm";
 import { message } from "antd";
+import ProductModelConfig from "./ProductModelConfig";
 
 const ProductContainer: FC = () => {
   const [list, setList] = useState<Product[]>([]);
@@ -22,6 +23,7 @@ const ProductContainer: FC = () => {
   const [item, setItem] = useState<Product>();
   const [formVisible, setFormVisible] = useState(false);
   const [params, setParams] = useState<Record<string, unknown>>();
+  const [drawerVisible, setDrawerVisible] = useState(false);
 
   const loadData = useCallback(() => {
     setLoading(true);
@@ -119,8 +121,12 @@ const ProductContainer: FC = () => {
     return result;
   }, [params, list]);
 
+  const onSaveModelConfig = useCallback((data: ProductModel) => {
+    console.log(data);
+  }, []);
+
   return (
-    <StyledContainer>
+    <StyledContainer id="JKL">
       <ProductSearch onSearch={onSearch} />
       <ProductTable
         data={filteredList}
@@ -129,12 +135,18 @@ const ProductContainer: FC = () => {
         onEdit={onEdit}
         onDel={onDel}
         onRefresh={onRefresh}
+        onModel={() => setDrawerVisible(true)}
       />
       <ProductForm
         visible={formVisible}
         item={item}
         onSave={onSave}
         onCancel={onClose}
+      />
+      <ProductModelConfig
+        visible={drawerVisible}
+        onClose={() => setDrawerVisible(false)}
+        onSave={onSaveModelConfig}
       />
     </StyledContainer>
   );
