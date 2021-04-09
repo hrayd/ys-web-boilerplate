@@ -11,3 +11,15 @@ export enum Sex {
   Male = 1,
 }
 export const SexList = [Sex.Female, Sex.Male];
+
+// 领域/场景
+interface Field {
+  name: string;
+  scenes: string[];
+}
+// 基础数据
+export interface BaseData {
+  fields: Field[]; // 领域/场景
+  plType: string[]; // 编程语言
+  arch: string[]; // 指令集架构
+}
