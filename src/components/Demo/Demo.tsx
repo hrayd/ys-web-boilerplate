@@ -19,14 +19,15 @@ const Demo: FC = () => {
   const [formVisible, setFormVisible] = useState(false);
   const [params, setParams] = useState<Record<string, unknown>>();
 
-  const loadData = useCallback(() => {
+  const loadData = useCallback(async () => {
     setLoading(true);
-    asyncGetDemoData((res) => {
+    try {
+      const res = await asyncGetDemoData();
       setLoading(false);
-      if (res.isOk) {
-        setList(res.data);
-      }
-    });
+      setList(res.data);
+    } catch {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -48,43 +49,44 @@ const Demo: FC = () => {
     setFormVisible(false);
   }, []);
 
-  const onDel = useCallback((data: IDemo) => {
-    asyncDelDemo(data, (res) => {
-      if (res.isOk) {
-        message.success("删除成功");
-        setList((prev) => prev.filter((p) => p.id !== data.id));
-      }
-    });
+  const onDel = useCallback(async (data: IDemo) => {
+    setLoading(true);
+    try {
+      await asyncDelDemo(data);
+      message.success("删除成功");
+      setList((prev) => prev.filter((p) => p.id !== data.id));
+      setLoading(false);
+    } catch {
+      setLoading(false);
+    }
   }, []);
 
   const onSave = useCallback(
-    (data: IDemo) => {
+    async (data: IDemo) => {
       setLoading(true);
-      if (data.id) {
-        asyncPutDemo(data, (res) => {
+      try {
+        if (data.id) {
+          const res = await asyncPutDemo(data);
+          message.success("编辑成功");
+          setList((prev) =>
+            prev.map((p) => {
+              if (p.id === data.id) {
+                return res.data;
+              }
+              return p;
+            })
+          );
+          onClose();
           setLoading(false);
-          if (res.isOk) {
-            message.success("编辑成功");
-            setList((prev) =>
-              prev.map((p) => {
-                if (p.id === data.id) {
-                  return res.data;
-                }
-                return p;
-              })
-            );
-            onClose();
-          }
-        });
-      } else {
-        asyncPostDemo(data, (res) => {
+        } else {
+          const res = await asyncPostDemo(data);
+          message.success("新增成功");
+          setList((prev) => [res.data, ...prev]);
+          onClose();
           setLoading(false);
-          if (res.isOk) {
-            message.success("新增成功");
-            setList((prev) => [res.data, ...prev]);
-            onClose();
-          }
-        });
+        }
+      } catch {
+        setLoading(false);
       }
     },
     [onClose]
@@ -102,10 +104,10 @@ const Demo: FC = () => {
     }
     let result = [...list];
     if (params.name) {
-      result = result.filter(r => r.name.includes(params.name as string));
+      result = result.filter((r) => r.name.includes(params.name as string));
     }
     if (params.sex !== undefined) {
-      result = result.filter(r => r.sex === params.sex);
+      result = result.filter((r) => r.sex === params.sex);
     }
     return result;
   }, [params, list]);

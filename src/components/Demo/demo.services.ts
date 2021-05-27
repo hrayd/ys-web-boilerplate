@@ -1,37 +1,30 @@
-import { message } from "antd";
 import api from "../../configs/api";
-import { AsyncCallback } from "../../models/common";
 import { IDemo } from "../../models/demo";
-import YSAxios, { callback } from "../../utils/YSAxios";
+import request from "../../utils/request";
 
-export const asyncGetDemoData = async (cb: AsyncCallback) => {
-  const res = await YSAxios.get(api.demo).catch((e) => {
-    message.error(e.message);
-    return e;
+export const asyncGetDemoData = (params?: any) =>
+  request({
+    method: "get",
+    url: api.demo,
+    params,
   });
-  callback(res, cb, []);
-};
 
-export const asyncPostDemo = async (data: IDemo, cb: AsyncCallback) => {
-  const res = await YSAxios.post(api.demo, data).catch((e) => {
-    message.error(e.message);
-    return e;
+export const asyncPostDemo = (data: IDemo) =>
+  request({
+    method: "post",
+    url: api.demo,
+    data,
   });
-  callback(res, cb, {});
-};
 
-export const asyncPutDemo = async (data: IDemo, cb: AsyncCallback) => {
-  const res = await YSAxios.put(`${api.demo}/${data.id}`, data).catch((e) => {
-    message.error(e.message);
-    return e;
+export const asyncPutDemo = (data: IDemo) =>
+  request({
+    method: "put",
+    url: `${api.demo}/${data.id}`,
+    data,
   });
-  callback(res, cb, data);
-};
 
-export const asyncDelDemo = async (data: IDemo, cb: AsyncCallback) => {
-  const res = await YSAxios.delete(`${api.demo}/${data.id}`).catch((e) => {
-    message.error(e.message);
-    return e;
+export const asyncDelDemo = (data: IDemo) =>
+  request({
+    method: "delete",
+    url: `${api.demo}/${data.id}`,
   });
-  callback(res, cb);
-};

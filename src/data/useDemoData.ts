@@ -5,11 +5,11 @@
 import useSWR from "swr";
 import api from "../configs/api";
 import { IDemo } from "../models/demo";
-import YSAxios from "../utils/YSAxios";
+import request from "../utils/request";
 
 const useDemoData = (params?: Record<string, unknown>) => {
   const { data, error } = useSWR<IDemo[]>(api.demo, (url) =>
-    YSAxios.get(url, { params }).then((res) => res.data)
+    request.get(url, { params }).then((res) => res.data)
   );
 
   return {
