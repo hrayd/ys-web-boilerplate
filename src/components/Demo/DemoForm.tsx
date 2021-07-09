@@ -57,18 +57,10 @@ const DemoForm: FC<Props> = ({ visible, item, onSave, onCancel }) => {
         labelCol={{ span: 6 }}
         wrapperCol={{ offset: 1, span: 16 }}
       >
-        <Form.Item
-          label={t("name")}
-          name="name"
-          rules={[{ required: true }]}
-        >
+        <Form.Item label={t("name")} name="name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item
-          label={t("sex")}
-          name="sex"
-          rules={[{ required: true }]}
-        >
+        <Form.Item label={t("sex")} name="sex" rules={[{ required: true }]}>
           <Radio.Group>
             <Radio value={1}>{t("sex1")}</Radio>
             <Radio value={0}>{t("sex0")}</Radio>

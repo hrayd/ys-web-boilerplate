@@ -3,8 +3,7 @@
  */
 import styled from "styled-components";
 
-interface Props {
-}
+interface Props {}
 
 const StyledTable = styled.div<Props>`
   flex: 1;

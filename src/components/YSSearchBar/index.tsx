@@ -66,10 +66,10 @@ const YSSearchBar: FC<Props> = ({
     });
   }, [items, showMore, showAll, t]);
 
-  const onClickSearch = useCallback(() => onSearch(form.getFieldsValue()), [
-    form,
-    onSearch,
-  ]);
+  const onClickSearch = useCallback(
+    () => onSearch(form.getFieldsValue()),
+    [form, onSearch]
+  );
 
   const onClickReset = useCallback(() => {
     form.resetFields();

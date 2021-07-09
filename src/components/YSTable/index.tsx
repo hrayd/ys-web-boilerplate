@@ -64,10 +64,10 @@ const YSTable: FC<Props> = ({
   );
 
   const showTotal = (total: number, range: [number, number]) => {
-    if (i18n.language === 'zh') {
+    if (i18n.language === "zh") {
       return `第 ${range[0]}-${range[1]} 条 / 共 ${total} 条`;
     }
-    return `${t("range")}: ${range[0]}-${range[1]} / ${t('total')}: ${total}`;
+    return `${t("range")}: ${range[0]}-${range[1]} / ${t("total")}: ${total}`;
   };
 
   const paginationConfig: TablePaginationConfig = {

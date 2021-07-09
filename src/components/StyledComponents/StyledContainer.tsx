@@ -12,7 +12,7 @@ const StyledContainer = styled.div<Props>`
   height: 100%;
   overflow: auto;
   display: flex;
-  flex-direction: ${props => props.direction || 'column'};
+  flex-direction: ${(props) => props.direction || "column"};
 `;
 
 export default StyledContainer;

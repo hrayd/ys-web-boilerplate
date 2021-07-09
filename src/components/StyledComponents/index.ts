@@ -1,3 +1,3 @@
-import StyledContainer from './StyledContainer';
+import StyledContainer from "./StyledContainer";
 
 export { StyledContainer };

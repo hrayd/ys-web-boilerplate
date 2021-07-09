@@ -39,8 +39,10 @@ const BasicForm: FC = () => {
             <Radio value="private">Private</Radio>
           </Radio.Group>
         </Form.Item>
-        <div style={{ marginTop: '1.5rem', marginLeft: '33%' }}>
-          <Button type="primary" style={{ marginRight: "1.5rem" }}>Submit</Button>
+        <div style={{ marginTop: "1.5rem", marginLeft: "33%" }}>
+          <Button type="primary" style={{ marginRight: "1.5rem" }}>
+            Submit
+          </Button>
           <Button>Save</Button>
         </div>
       </Form>
