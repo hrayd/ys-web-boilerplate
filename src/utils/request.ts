@@ -28,7 +28,6 @@ const onRejected = (err: any): Promise<void> => {
   if (err.response) {
     switch (err.response.status) {
       case 401:
-      case 502:
         msg = "请重新登录";
         clearAndBackLogin();
         return new Promise(() => {});
@@ -60,11 +59,8 @@ request.interceptors.response.use(onFullFilled, onRejected);
 
 export default request;
 
-export const requestDownload = (
-  url: string,
-  method: Method = "get",
-  data?: any
-) => {
+/** 下载流文件 */
+const requestDownload = (url: string, method: Method = "get", data?: any) => {
   return request({
     method,
     url,
@@ -76,3 +72,9 @@ export const requestDownload = (
     },
   });
 };
+
+/** 无需token的请求 */
+const requestWithoutAuth = axios.create({ baseURL: BASE_URL });
+requestWithoutAuth.interceptors.response.use(onFullFilled, onRejected);
+
+export { requestWithoutAuth, requestDownload };
