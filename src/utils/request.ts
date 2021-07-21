@@ -1,5 +1,5 @@
 import { message } from "antd";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 import log from "loglevel";
 import { BASE_URL } from "./apiUtils";
 import history from "./history";
@@ -28,6 +28,7 @@ const onRejected = (err: any): Promise<void> => {
   if (err.response) {
     switch (err.response.status) {
       case 401:
+      case 502:
         msg = "请重新登录";
         clearAndBackLogin();
         return new Promise(() => {});
@@ -43,7 +44,6 @@ const onRejected = (err: any): Promise<void> => {
 const requestOnFullFilled = (
   request: AxiosRequestConfig
 ): AxiosRequestConfig | Promise<AxiosRequestConfig> => {
-  // 添加token
   const token = getToken();
   if (token) {
     return Object.assign(request, {
@@ -59,3 +59,20 @@ request.interceptors.request.use(requestOnFullFilled);
 request.interceptors.response.use(onFullFilled, onRejected);
 
 export default request;
+
+export const requestDownload = (
+  url: string,
+  method: Method = "get",
+  data?: any
+) => {
+  return request({
+    method,
+    url,
+    data,
+    responseType: "blob",
+    headers: {
+      Accept: "application/octet-stream,application/json",
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
