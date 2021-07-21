@@ -1,10 +1,8 @@
-/** 左侧菜单 */
-import { FC, useMemo } from "react";
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+/** 左侧组件列表 */
+import { FC } from "react";
 import styled from "styled-components";
-import routeConfigs from "../../configs/routeConfigs";
-import { Menu as AntdMenu } from "antd";
-import { useTranslation } from "react-i18next";
+import pluginList from "../../plugins";
+import { Plugin } from "../../models/plugin";
 
 const StyledMenu = styled.div`
   width: 15rem;
@@ -13,33 +11,27 @@ const StyledMenu = styled.div`
   margin: 2rem 0;
 `;
 
-const Menu: FC<RouteComponentProps> = ({ location }) => {
-  const { t } = useTranslation("menu");
+const StyledPlugin = styled.div`
+  height: 1rem;
+  margin: 5px;
+`;
 
-  const activity = useMemo(() => {
-    return (
-      routeConfigs.find((r) => location.pathname.indexOf(r.path) === 1)?.path ||
-      ""
-    );
-  }, [location]);
+interface Props {
+  setDragged: (plugin: Plugin) => void;
+}
 
-  const menus = useMemo(() => {
-    return routeConfigs.map((c) => {
-      return (
-        <AntdMenu.Item style={{ fontSize: "1rem" }} key={c.path}>
-          <Link to={`/${c.path}`}>{t(c.path)}</Link>
-        </AntdMenu.Item>
-      );
-    });
-  }, [t]);
-
+const Menu: FC<Props> = ({ setDragged }) => {
   return (
     <StyledMenu>
-      <AntdMenu mode="inline" selectedKeys={[activity]}>
-        {menus}
-      </AntdMenu>
+      {pluginList.map((plugin) => (
+        <StyledPlugin
+          key={plugin.name}
+          draggable
+          onDragStart={() => setDragged(plugin)}
+        >{`${plugin.name}`}</StyledPlugin>
+      ))}
     </StyledMenu>
   );
 };
 
-export default withRouter(Menu);
+export default Menu;

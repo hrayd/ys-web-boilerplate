@@ -1,44 +1,22 @@
 /** Home内容主页 */
-import { FC, Suspense, useMemo } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { FC, Suspense, useState } from "react";
 import styled from "styled-components";
-import routeConfigs, { HOME_PATH } from "../../configs/routeConfigs";
-import Page404 from "../../pages/404";
-import ErrorPage from "../../pages/ErrorPage";
 import LoadingPage from "../../pages/LoadingPage";
-import Footer from "../Footer";
 import Header from "../Header";
 import Menu from "../Menu";
+import Editor from "../Editor";
+import { Plugin } from "../../models/plugin";
 
 const Home: FC = () => {
-  const routes = useMemo(
-    () =>
-      routeConfigs.map((c) => {
-        return (
-          <Route key={c.path} path={`/${c.path}`} component={c.component} />
-        );
-      }),
-    []
-  );
-
+  const [dragged, setDragged] = useState<Plugin>();
   return (
     <Suspense fallback={<LoadingPage />}>
       <StyledApp>
         <Header />
         <StyledContent>
-          <Menu />
+          <Menu setDragged={setDragged} />
           <StyledHome>
-            <StyledRoutes>
-              <Suspense fallback={<LoadingPage />}>
-                <Switch>
-                  <Redirect from="/" to={HOME_PATH} exact />
-                  {routes}
-                  <Route path="/error" component={ErrorPage} />
-                  <Route path="/" component={Page404} />
-                </Switch>
-              </Suspense>
-            </StyledRoutes>
-            <Footer copyright="版权信息" />
+            <Editor dragged={dragged} setDragged={setDragged} />
           </StyledHome>
         </StyledContent>
       </StyledApp>
@@ -69,9 +47,4 @@ const StyledHome = styled.div`
   overflow: auto;
   display: flex;
   flex-direction: column;
-`;
-
-const StyledRoutes = styled.div`
-  padding: 1rem;
-  flex: 1;
 `;
