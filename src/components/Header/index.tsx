@@ -31,12 +31,12 @@ const Header: FC = () => {
 
   const userOverlay = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key="changePassword">
         <Button type="text" size="small">
           {t("changePassword")}
         </Button>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key="logout">
         <Button type="text" size="small" onClick={onLogout}>
           {t("logout")}
         </Button>
@@ -63,22 +63,26 @@ const Header: FC = () => {
     <StyledHeader>
       <StyledHeaderIcon />
       <StyledHeaderTitle>{t("APP_TITLE")}</StyledHeaderTitle>
-      <Dropdown overlay={userOverlay}>
-        <StyledHeaderUser>
-          <Avatar
-            icon={<UserOutlined />}
-            size="small"
-            style={{ marginRight: ".5rem", backgroundColor: "#2196f3" }}
-          />
-          {"管理员 "}
-          <DownOutlined />
-        </StyledHeaderUser>
-      </Dropdown>
-      <Dropdown overlay={i18nOverlay}>
-        <StyledHeaderI18n>
+
+      <StyledHeaderUser>
+        <Dropdown overlay={userOverlay}>
+          <span>
+            <Avatar
+              icon={<UserOutlined />}
+              size="small"
+              style={{ marginRight: ".5rem", backgroundColor: "#2196f3" }}
+            />
+            {"管理员 "}
+            <DownOutlined />
+          </span>
+        </Dropdown>
+      </StyledHeaderUser>
+
+      <StyledHeaderI18n>
+        <Dropdown overlay={i18nOverlay}>
           <TranslationOutlined />
-        </StyledHeaderI18n>
-      </Dropdown>
+        </Dropdown>
+      </StyledHeaderI18n>
     </StyledHeader>
   );
 };
