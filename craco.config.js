@@ -1,5 +1,5 @@
-const CracoLessPlugin = require('craco-less');
-const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
+const CracoLessPlugin = require("craco-less");
+const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
 
 module.exports = {
   plugins: [
@@ -8,7 +8,7 @@ module.exports = {
       options: {
         lessLoaderOptions: {
           lessOptions: {
-            modifyVars: { '@primary-color': '#2196F3' },
+            modifyVars: { "@primary-color": "#2196F3" },
             javascriptEnabled: true,
           },
         },
@@ -16,4 +16,9 @@ module.exports = {
     },
     { plugin: new AntdDayjsWebpackPlugin() },
   ],
+  style: {
+    postcss: {
+      plugins: [require("tailwindcss"), require("autoprefixer")],
+    },
+  },
 };
