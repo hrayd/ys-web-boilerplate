@@ -21,5 +21,6 @@
   "save": "保存",
   "cancel": "取消",
   "operations": "操作",
-  "confirmDelete": "确认删除？"
+  "confirmDelete": "确认删除？",
+  "optSuccess": "操作成功"
 }

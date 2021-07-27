@@ -13,9 +13,9 @@ const useDemoData = (params?: Record<string, unknown>) => {
   );
 
   return {
-    data,
+    data: data || [],
     error,
-    isLoading: !error && !data,
+    loading: !error && !data,
   };
 };
 

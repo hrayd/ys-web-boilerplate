@@ -17,6 +17,7 @@ import "./index.css";
 import "./i18n";
 import "./App.less";
 import "dayjs/locale/zh-cn";
+import { SWRConfig } from "swr";
 
 const dayjsLocaleMap = {
   zh: "zh",
@@ -29,6 +30,10 @@ const antdLocaleMap = {
   zh: zhCN,
   en: enUS,
 };
+
+// SWR全局配置
+// 取消“聚焦时重新请求”
+const swrConfig = { revalidateOnFocus: false };
 
 function App() {
   const [language, setLanguage] = useState(i18nList[0].key);
@@ -44,12 +49,14 @@ function App() {
   return (
     <LanguageContext.Provider value={languageContextValue}>
       <ConfigProvider locale={antdLocaleMap[language]}>
-        <Router history={history}>
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/" component={Home} />
-          </Switch>
-        </Router>
+        <SWRConfig value={swrConfig}>
+          <Router history={history}>
+            <Switch>
+              <Route path="/login" component={Login} />
+              <Route path="/" component={Home} />
+            </Switch>
+          </Router>
+        </SWRConfig>
       </ConfigProvider>
     </LanguageContext.Provider>
   );

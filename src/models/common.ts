@@ -8,3 +8,6 @@ export type AsyncCallback = (props: { isOk: boolean; data: any }) => void;
 // 字典项
 export type Dict = { id: string; name: string };
 export type DictList = Dict[];
+
+// 通用回调函数
+export type Callback<T = any> = (data?: T) => void;

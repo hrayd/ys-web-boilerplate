@@ -21,5 +21,6 @@
   "save": "Save",
   "cancel": "Cancel",
   "operations": "Operations",
-  "confirmDelete": "Confirm Delete?"
+  "confirmDelete": "Confirm Delete?",
+  "optSuccess": "Success"
 }

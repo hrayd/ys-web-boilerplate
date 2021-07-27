@@ -5,35 +5,26 @@ import DemoTable from "./DemoTable";
 import { IDemo } from "../../models/demo";
 import {
   asyncDelDemo,
-  asyncGetDemoData,
   asyncPostDemo,
   asyncPutDemo,
+  filterDemoList,
 } from "./demo.services";
 import DemoForm from "./DemoForm";
-import { message } from "antd";
+import useDemoData from "../../data/useDemoData";
+import { mutate } from "swr";
+import api from "../../configs/api";
 
 const Demo: FC = () => {
-  const [list, setList] = useState<IDemo[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data, loading } = useDemoData();
   const [item, setItem] = useState<IDemo>();
   const [formVisible, setFormVisible] = useState(false);
   const [params, setParams] = useState<Record<string, unknown>>();
 
-  const loadData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await asyncGetDemoData();
-      setLoading(false);
-      setList(res.data);
-    } catch {
-      setLoading(false);
-    }
-  }, []);
+  const reloadData = useCallback(() => mutate(api.demo), []);
 
   useEffect(() => {
-    loadData();
-    return () => setList([]);
-  }, [loadData]);
+    reloadData();
+  }, [reloadData]);
 
   const onAdd = useCallback(() => {
     setFormVisible(true);
@@ -49,68 +40,37 @@ const Demo: FC = () => {
     setFormVisible(false);
   }, []);
 
-  const onDel = useCallback(async (data: IDemo) => {
-    setLoading(true);
-    try {
-      await asyncDelDemo(data);
-      message.success("删除成功");
-      setList((prev) => prev.filter((p) => p.id !== data.id));
-      setLoading(false);
-    } catch {
-      setLoading(false);
-    }
-  }, []);
+  const onDel = useCallback(
+    (data: IDemo) => {
+      asyncDelDemo(data, reloadData);
+    },
+    [reloadData]
+  );
+
+  const editCallback = useCallback(() => {
+    onClose();
+    reloadData();
+  }, [onClose, reloadData]);
 
   const onSave = useCallback(
-    async (data: IDemo) => {
-      setLoading(true);
-      try {
-        if (data.id) {
-          const res = await asyncPutDemo(data);
-          message.success("编辑成功");
-          setList((prev) =>
-            prev.map((p) => {
-              if (p.id === data.id) {
-                return res.data;
-              }
-              return p;
-            })
-          );
-          onClose();
-          setLoading(false);
-        } else {
-          const res = await asyncPostDemo(data);
-          message.success("新增成功");
-          setList((prev) => [res.data, ...prev]);
-          onClose();
-          setLoading(false);
-        }
-      } catch {
-        setLoading(false);
+    (data: IDemo) => {
+      if (data.id) {
+        asyncPutDemo(data, editCallback);
+      } else {
+        asyncPostDemo(data, editCallback);
       }
     },
-    [onClose]
+    [editCallback]
   );
 
   const onSearch = useCallback((newParams?: Record<string, unknown>) => {
     setParams(newParams);
   }, []);
 
-  const onRefresh = useCallback(() => loadData(), [loadData]);
-
-  const filteredList = useMemo(() => {
-    if (!params) {
-      return list;
-    }
-    let result = [...list];
-    if (params.name) {
-      result = result.filter((r) => r.name.includes(params.name as string));
-    }
-    if (params.sex !== undefined) {
-      result = result.filter((r) => r.sex === params.sex);
-    }
-    return result;
-  }, [params, list]);
+  const filteredList = useMemo(
+    () => filterDemoList(data, params),
+    [params, data]
+  );
 
   return (
     <StyledContainer>
@@ -121,7 +81,7 @@ const Demo: FC = () => {
         onAdd={onAdd}
         onEdit={onEdit}
         onDel={onDel}
-        onRefresh={onRefresh}
+        onRefresh={reloadData}
       />
       <DemoForm
         visible={formVisible}
