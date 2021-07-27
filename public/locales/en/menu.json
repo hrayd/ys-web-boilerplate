@@ -1,4 +1,6 @@
 {
+  "openMenu": "Display Menu",
+  "closeMenu": "Collapse Menu",
   "page1": "Table Page",
   "page2": "Basic Form",
   "page3": "Step Form",
