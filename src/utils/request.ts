@@ -4,7 +4,7 @@ import log from "loglevel";
 import { BASE_URL } from "./apiUtils";
 import history from "./history";
 import { setPreLocation } from "./preLocationUtils";
-import { clearToken, getToken } from "./tokenUtils";
+import { clearToken } from "./tokenUtils";
 
 const request = axios.create({ baseURL: BASE_URL });
 
@@ -43,15 +43,17 @@ const onRejected = (err: any): Promise<void> => {
 const requestOnFullFilled = (
   request: AxiosRequestConfig
 ): AxiosRequestConfig | Promise<AxiosRequestConfig> => {
-  const token = getToken();
-  if (token) {
-    return Object.assign(request, {
-      headers: { ...request.headers, Authorization: token },
-    });
-  }
-  message.info("请重新登录");
-  clearAndBackLogin();
-  return new Promise(() => {});
+  return request;
+  // 校验token
+  // const token = getToken();
+  // if (token) {
+  //   return Object.assign(request, {
+  //     headers: { ...request.headers, Authorization: token },
+  //   });
+  // }
+  // message.info("请重新登录");
+  // clearAndBackLogin();
+  // return new Promise(() => {});
 };
 
 request.interceptors.request.use(requestOnFullFilled);
