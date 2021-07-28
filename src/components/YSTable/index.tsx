@@ -44,7 +44,7 @@ const YSTable: FC<Props> = ({
   ...tableProps
 }) => {
   const { t, i18n } = useTranslation("common");
-  const [tableSize, setTableSize] = useState(tableSizeList[0]);
+  const [tableSize, setTableSize] = useState(tableSizeList[1]);
 
   // 提取出需要修改的属性，其他的属性直接放入Table组件
   const { pagination, ...otherTableProps } = tableProps;
