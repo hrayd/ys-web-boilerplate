@@ -27,12 +27,12 @@ const Home: FC = () => {
 
   return (
     <Suspense fallback={<LoadingPage />}>
-      <div className="w-screen min-w-min h-screen flex flex-col">
+      <div className="w-screen min-w-min h-screen overflow-hidden flex flex-col">
         <Header />
-        <div className="w-full flex-1 flex flex-row">
+        <div className="w-full flex-1 flex flex-row overflow-hidden">
           <Menu />
-          <div className="flex-1 flex flex-col">
-            <div className="flex-1 p-4">
+          <div className="flex-1 flex flex-col p-4 overflow-auto">
+            <div className="flex-1">
               <Suspense fallback={<LoadingPage />}>
                 <Switch>
                   <Redirect from="/" to={HOME_PATH} exact />
@@ -42,6 +42,7 @@ const Home: FC = () => {
                 </Switch>
               </Suspense>
             </div>
+
             <Footer copyright="版权信息" />
           </div>
         </div>

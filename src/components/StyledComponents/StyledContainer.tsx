@@ -10,7 +10,7 @@ interface Props {
 const StyledContainer = styled.div<Props>`
   width: 100%;
   height: 100%;
-  overflow: auto;
+  /* overflow: auto; */
   display: flex;
   flex-direction: ${(props) => props.direction || "column"};
 `;

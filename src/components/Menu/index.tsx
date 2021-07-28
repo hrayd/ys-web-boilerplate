@@ -21,7 +21,7 @@ const Menu: FC<RouteComponentProps> = ({ location }) => {
   const menus = useMemo(() => {
     return routeConfigs.map((c) => {
       return (
-        <AntdMenu.Item style={{ fontSize: "1rem" }} key={c.path}>
+        <AntdMenu.Item key={c.path} className="text-base text-center">
           <Link to={`/${c.path}`}>{t(c.path)}</Link>
         </AntdMenu.Item>
       );
