@@ -83,10 +83,8 @@ const YSSearchBar: FC<Props> = ({
         padding: "24px",
         paddingBottom: 0,
       }}
-      labelCol={{ span: 6 }}
-      wrapperCol={{ span: 18 }}
     >
-      <Row style={{ borderBottom: "1px solid #f0f0f0" }}>
+      <Row gutter={16} style={{ borderBottom: "1px solid #f0f0f0" }}>
         {formItems}
         <Col flex={1} style={{ marginBottom: "24px", textAlign: "right" }}>
           <Button
