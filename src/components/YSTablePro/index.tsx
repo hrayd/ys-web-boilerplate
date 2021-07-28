@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useMemo } from "react";
 import { Column, useTable } from "react-table";
 import styled from "styled-components";
 
@@ -26,18 +26,23 @@ const converseColumns = <T extends object = {}>(
   }));
 };
 
-const YSTablePro: FC<Props> = ({ columns, data, width }) => {
-  const tableInstance = useTable({ columns: converseColumns(columns), data });
+const gerCellView = (cell: any, index: number) => {
+  if (cell.column._render) {
+    return cell.column._render(cell.value, cell.row, index);
+  }
+  return cell.render("Cell");
+};
+
+const YSTablePro: FC<Props> = ({ columns: originColumns, data, width }) => {
+  const columns = useMemo(
+    () => converseColumns(originColumns),
+    [originColumns]
+  );
+
+  const tableInstance = useTable({ columns, data });
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
-
-  const gerCellView = (cell: any, index: number) => {
-    if (cell.column._render) {
-      return cell.column._render(cell.value, cell.row, index);
-    }
-    return cell.render("Cell");
-  };
 
   return (
     <Styles width={width}>
