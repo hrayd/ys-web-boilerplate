@@ -1,25 +1,43 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { Column, useTable } from "react-table";
 import styled from "styled-components";
 
+interface YSTableColumn<T extends object = {}> {
+  title: string;
+  dataIndex: keyof T;
+  key?: string;
+  render?: (value: any, row: T, index: number) => ReactNode;
+}
+
 interface Props<T extends object = {}> {
-  columns: Column[];
+  columns: YSTableColumn<T>[];
   data: T[];
   width?: string | number;
 }
 
+const converseColumns = <T extends object = {}>(
+  columns: YSTableColumn<T>[]
+): Column<T>[] => {
+  return columns.map((c) => ({
+    ...c,
+    Header: c.title,
+    accessor: c.dataIndex,
+    _render: c.render,
+  }));
+};
+
 const YSTablePro: FC<Props> = ({ columns, data, width }) => {
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable({ columns: converseColumns(columns), data });
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
 
-  // const gerCellView = (cell: any) => {
-  //   if (cell.column._render) {
-  //     return cell.column._render(cell.value, cell.row, 1);
-  //   }
-  //   return cell.render("Cell");
-  // };
+  const gerCellView = (cell: any, index: number) => {
+    if (cell.column._render) {
+      return cell.column._render(cell.value, cell.row, index);
+    }
+    return cell.render("Cell");
+  };
 
   return (
     <Styles width={width}>
@@ -58,13 +76,13 @@ const YSTablePro: FC<Props> = ({ columns, data, width }) => {
                 <tr {...row.getRowProps()}>
                   {
                     // Loop over the rows cells
-                    row.cells.map((cell) => {
+                    row.cells.map((cell, index) => {
                       // Apply the cell props
                       return (
                         <td {...cell.getCellProps()}>
                           {
                             // Render the cell contents
-                            cell.render("Cell")
+                            gerCellView(cell, index)
                           }
                         </td>
                       );
