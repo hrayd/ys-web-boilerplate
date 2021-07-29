@@ -115,8 +115,14 @@ const Styles = styled.div<StyleProps>`
   table {
     width: ${(props) => props.width || "100%"};
     border-spacing: 0;
-    border: 1px solid black;
+    border-bottom: 1px solid #f0f0f0;
+
+    thead {
+      background: #fafafa;
+    }
+
     tr {
+      text-align: left;
       :last-child {
         td {
           border-bottom: 0;
@@ -128,8 +134,8 @@ const Styles = styled.div<StyleProps>`
     td {
       margin: 0;
       padding: 0.5rem;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
+      border-bottom: 1px solid #f0f0f0;
+      border-right: 1px solid #f0f0f0;
 
       :last-child {
         border-right: 0;
