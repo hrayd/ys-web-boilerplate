@@ -77,7 +77,6 @@ const YSTablePro: FC<Props> = ({ columns: originColumns, data, width }) => {
               // Prepare the row for display
               prepareRow(row);
               return (
-                // Apply the row props
                 <tr {...row.getRowProps()}>
                   {
                     // Loop over the rows cells
@@ -123,6 +122,9 @@ const Styles = styled.div<StyleProps>`
 
     tr {
       text-align: left;
+      :hover {
+        background: #fafafa;
+      }
       :last-child {
         td {
           border-bottom: 0;
