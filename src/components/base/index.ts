@@ -56,7 +56,8 @@ export {
   Spin,
   Anchor,
   BackTop,
-  Empty,
 } from "antd";
 // 定制的组件
 export { Button } from "./Button";
+export { default as Empty } from "./Empty";
+export { default as ErrorBoundary } from "./ErrorBoundray";

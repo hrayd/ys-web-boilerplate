@@ -5,7 +5,7 @@ import routeConfigs, { HOME_PATH } from "../../configs/routeConfigs";
 import Page404 from "../../pages/404";
 import ErrorPage from "../../pages/ErrorPage";
 import LoadingPage from "../../pages/LoadingPage";
-import withErrorBoundary from "../ErrorBoundray";
+import withErrorBoundary from "../base/ErrorBoundray";
 import Footer from "../Footer";
 import Header from "../Header";
 import Menu from "../Menu";
