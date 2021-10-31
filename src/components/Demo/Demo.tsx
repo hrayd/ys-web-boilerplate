@@ -13,32 +13,23 @@ import DemoForm from "./DemoForm";
 import useDemoData from "../../data/useDemoData";
 import { mutate } from "swr";
 import api from "../../configs/api";
+import useFormState from "../../hooks/useFormState";
 
 const Demo: FC = () => {
   const { data, loading } = useDemoData();
-  const [item, setItem] = useState<IDemo>();
-  const [formVisible, setFormVisible] = useState(false);
   const [params, setParams] = useState<Record<string, unknown>>();
+  const {
+    data: formData,
+    visible: formVisible,
+    open: openForm,
+    close: closeForm,
+  } = useFormState<IDemo>();
 
   const reloadData = useCallback(() => mutate(api.demo), []);
 
   useEffect(() => {
     reloadData();
   }, [reloadData]);
-
-  const onAdd = useCallback(() => {
-    setFormVisible(true);
-  }, []);
-
-  const onEdit = useCallback((editItem: IDemo) => {
-    setItem(editItem);
-    setFormVisible(true);
-  }, []);
-
-  const onClose = useCallback(() => {
-    setItem(undefined);
-    setFormVisible(false);
-  }, []);
 
   const onDel = useCallback(
     (data: IDemo) => {
@@ -48,9 +39,9 @@ const Demo: FC = () => {
   );
 
   const editCallback = useCallback(() => {
-    onClose();
+    closeForm();
     reloadData();
-  }, [onClose, reloadData]);
+  }, [closeForm, reloadData]);
 
   const onSave = useCallback(
     (data: IDemo) => {
@@ -78,16 +69,16 @@ const Demo: FC = () => {
       <DemoTable
         data={filteredList}
         loading={loading}
-        onAdd={onAdd}
-        onEdit={onEdit}
+        onAdd={openForm}
+        onEdit={openForm}
         onDel={onDel}
         onRefresh={reloadData}
       />
       <DemoForm
         visible={formVisible}
-        item={item}
+        item={formData}
         onSave={onSave}
-        onCancel={onClose}
+        onCancel={closeForm}
       />
     </StyledContainer>
   );
