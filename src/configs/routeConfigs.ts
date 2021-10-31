@@ -5,7 +5,7 @@
 import { ComponentClass, FC, lazy } from "react";
 import DemoUseDeBounce from "../hooks/examples/DebounceAndThrottle";
 // 使用延迟加载的方式引入组件
-const Demo = lazy(() => import("../components/Demo"));
+const Demo = lazy(() => import("../components/DemoPage"));
 const BasicForm = lazy(() => import("../components/DemoForm/BasicForm"));
 const StepForm = lazy(() => import("../components/DemoForm/StepForm"));
 

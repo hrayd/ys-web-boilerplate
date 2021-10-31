@@ -1,8 +1,11 @@
+/**
+ * Demo表格
+ */
 import dayjs from "dayjs";
 import { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { IDemo } from "../../models/demo";
-import YSTable from "../YSTable";
+import { YSTable } from "../base";
 import { DateFormatString } from "../../constants/strings";
 import { Button, Popconfirm } from "antd";
 import { Sex } from "../../models/dict";

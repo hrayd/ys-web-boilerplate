@@ -62,3 +62,5 @@ export { Button } from "./Button";
 export { DatePicker, Calendar, TimePicker } from "./DatePicker";
 export { default as Empty } from "./Empty";
 export { default as ErrorBoundary } from "./ErrorBoundray";
+export { default as YSTable } from "./YSTable";
+export { default as YSSearchBar } from "./YSSearchBar";

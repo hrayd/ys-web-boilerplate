@@ -1,6 +1,9 @@
+/**
+ * Demo搜索栏
+ */
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import YSSearchBar from "../YSSearchBar";
+import { YSSearchBar } from "../base";
 import { Select } from "antd";
 import { SexList } from "../../models/dict";
 
