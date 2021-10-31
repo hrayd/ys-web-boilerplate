@@ -59,5 +59,6 @@ export {
 } from "antd";
 // 定制的组件
 export { Button } from "./Button";
+export { DatePicker, Calendar, TimePicker } from "./DatePicker";
 export { default as Empty } from "./Empty";
 export { default as ErrorBoundary } from "./ErrorBoundray";

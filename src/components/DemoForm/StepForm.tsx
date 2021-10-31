@@ -1,6 +1,6 @@
 import { Button, Divider, Form, Input, Select, Steps } from "antd";
 import { FC } from "react";
-import { DatePicker } from "../YSDatePicker";
+import { DatePicker } from "../base/DatePicker";
 
 const StepForm: FC = () => {
   return (
