@@ -3,11 +3,11 @@
  * @author donghui
  */
 import { ComponentClass, FC, lazy } from "react";
+import DemoUseDeBounce from "../hooks/examples/DebounceAndThrottle";
 // 使用延迟加载的方式引入组件
 const Demo = lazy(() => import("../components/Demo"));
 const BasicForm = lazy(() => import("../components/DemoForm/BasicForm"));
 const StepForm = lazy(() => import("../components/DemoForm/StepForm"));
-const ComplexForm = lazy(() => import("../components/DemoForm/ComplexForm"));
 
 // 主页路径
 export const HOME_PATH = "/page1";
@@ -20,7 +20,7 @@ const routeConfigs: RouterConfigItem[] = [
   { path: "page1", component: Demo },
   { path: "page2", component: BasicForm },
   { path: "page3", component: StepForm },
-  { path: "page4", component: ComplexForm },
+  { path: "page4", component: DemoUseDeBounce },
 ];
 
 export default routeConfigs;
